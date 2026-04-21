@@ -14,7 +14,7 @@
 #       <body>          ← runs only while condition is True
 
 # ================================================================
-# SECTION 1 — THE BASIC WHILE LOOP
+# SECTION 1 — THE BASIC WHILE LOOP :
 # The condition is checked BEFORE every iteration.If it's False from the start, the body never runs even once.
 
 num = 1                                       # Output 
@@ -37,7 +37,7 @@ while attempts < 5:        # 10 < 5 is False immediately
 print("Skipped entirely")   # this runs right away
 
 # ================================================================
-# SECTION 2 — COUNTING UP AND DOWN
+# SECTION 2 — COUNTING UP AND DOWN :
 # Counting up:
 print("\n--- Counting up ---")
 n = 1
@@ -63,7 +63,7 @@ while n <= 30:
 # Output: 0 3 6 9 12 15 18 21 24 27 30
 
 # ================================================================
-# SECTION 3 — LOOPING OVER SEQUENCES WITH WHILE
+# SECTION 3 — LOOPING OVER SEQUENCES WITH WHILE :
 # for loops are cleaner for sequences, but while gives you direct index control — useful when you need to modify the list or mid-loop 
 
 cities = ["Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta"]
@@ -84,7 +84,7 @@ while idx < len(cities):
     idx += 1
 # For each city, we convert it to lowercase, replace spaces with underscores, then build an email.Like this ,city_karachi@gov.pk
 
-# Dictionary traversal using while
+# Dictionary traversal using while :
 student_scores = {
     "Ayesha": 88,
     "Bilal": 72,
@@ -116,8 +116,7 @@ while idx < len(keys):
     idx += 1
 
 # ================================================================
-# SECTION 4 — while True + break (EVENT-DRIVEN LOOPS)
-# ================================================================
+# SECTION 4 — while True + break (EVENT-DRIVEN LOOPS) : 
 # Sometimes you don't know the exit condition until you're inside the loop. The pattern: start with while True, exit with break.
 # This is the correct and intentional use of an infinite loop.
 
@@ -147,32 +146,22 @@ while True:
         break
 
 # ================================================================
-# SECTION 5 — break
+# SECTION 5 — while loop with break :
 # ================================================================
-# break immediately exits the innermost loop, regardless of whether
-# the while condition is still True.
+# break immediately exits the innermost loop, regardless of whether the while condition is still True.
 # Execution jumps to the first statement AFTER the loop.
 
-numbers = [4, 9, 2, 17, 5, 33, 8, 1]
-target = 17
+numbers = [10, 45, 23, 67, -5, 89, 34]
+i = 0
 
-print(f"\n--- Searching for {target} ---")
-idx = 0
-found_at = -1
-
-while idx < len(numbers):
-    if numbers[idx] == target:
-        found_at = idx
-        break                   # no point continuing — we found it
-    idx += 1
-
-if found_at != -1:
-    print(f"  Found {target} at index {found_at}")
-else:
-    print(f"  {target} not found")
-
+while i < len(numbers):
+    if numbers[i] < 0:
+        print(f"First negative number found: {numbers[i]} at index {i}")
+        break
+    i += 1        # Output: First negative number found: -5 at index 4
+    
 # ================================================================
-# SECTION 6 — continue : 
+# SECTION 6 — while loop with continue : 
 # continue skips the REST of the current iteration and jumps back to the while condition check. The loop does NOT exit.
 
 print("\n--- Skip even numbers ---")
@@ -184,11 +173,10 @@ while n < 10:
     print(n, end=" ")
 # Output: 1 3 5 7 9
 
-# IMPORTANT: When using continue, make sure you update the loop
-# variable BEFORE the continue, or you'll create an infinite loop.
+# IMPORTANT: When using continue, make sure you update the loop variable BEFORE the continue, or you'll create an infinite loop.
 
 # ================================================================
-# SECTION 7 — pass : 
+# SECTION 7 — while loop with pass : 
 # pass is a null statement — it does nothing.
 # Use it as a placeholder when Python syntax requires a body but you have nothing to put there yet.
 
@@ -203,7 +191,7 @@ while position < 5:
 # pass allows the loop to exist without giving an error. It is useful when you plan to add logic later
 
 # ================================================================
-# SECTION 8 — while / else
+# SECTION 8 — while / else : 
 # Python's while loop has an optional else clause.
 # The else block runs ONLY IF the loop ended naturally (condition became False). It does NOT run if the loop was exited with break.
 # This is the most overlooked feature of Python loops.
