@@ -147,7 +147,6 @@ while True:
 
 # ================================================================
 # SECTION 5 — while loop with break :
-# ================================================================
 # break immediately exits the innermost loop, regardless of whether the while condition is still True.
 # Execution jumps to the first statement AFTER the loop.
 
@@ -197,44 +196,40 @@ while position < 5:
 # This is the most overlooked feature of Python loops.
 
 # Case 1: Loop completes naturally → else RUNS
-print("\n--- while/else: natural completion ---")
-n = 1
-while n <= 3:
-    print(f"  tick {n}")
-    n += 1
-else:
-    print("  Loop finished normally — else block ran")
+n = 1                                                  # Output:
+while n <= 3:                                          # Number 1
+    print(f"Number {n}")                               # Number 2
+    n += 1                                             # Number 3
+else:                                                  # Loop finished normally — else block ran
+    print("Loop finished normally — else block ran")
+    
 
 # Case 2: Loop exits via break → else does NOT run
-print("\n--- while/else: break prevents else ---")
 n = 1
 while n <= 5:
     if n == 3:
-        print(f"  Breaking at n={n}")
-        break
-    print(f"  tick {n}")
+        break           # forced exit
+    print(f"Number {n}")
     n += 1
 else:
-    print("  This will NOT print")
+    print("This will NOT print")
 
 # ================================================================
-# SECTION 10 — DO-WHILE PATTERN
-# ================================================================
+# SECTION 9 — DO-WHILE PATTERN :
 # Python has no do-while keyword.
-# In a do-while loop (from C/Java), the body runs at LEAST once
-# before the condition is checked.
-# We simulate it with while True + break at the end.
+# In a do-while loop (from C/Java), the body runs at LEAST once before the condition is checked.We simulate it with while True + break at the end.
 
 # Standard while — body may never run:
 value = 100
 while value < 10:
     print("standard while: never runs if condition is False at start")
 
-# do-while pattern — body ALWAYS runs at least once:
-print("\n--- do-while pattern ---")
+# do-while pattern — body ALWAYS runs at least once:                 
 attempt = 0
 while True:
     attempt += 1
     print(f"  Attempt {attempt}")   # always runs at least once
     if attempt >= 3:
         break                       # condition checked at the END
+    
+# Output :  Attempt 1       Attempt 2       Attempt 3
