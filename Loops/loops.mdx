@@ -21,3 +21,43 @@ for student in students:
     print(student)
 ```
 Same result. One piece of logic. Works for 3 or 3 million names.
+
+## 🔶 The Two Types of Loops in Python : 
+
+### 1 .while loop → condition-driven
+"keep going WHILE something is True" . Use when you don't know how many times to repeat.
+
+**Example:**
+```python
+count = 1
+while count <= 5:
+    print("Number:", count)
+    count += 1
+```
+### 2. for loop → iteration-driven
+"do this FOR each item in a collection" . Use when the number of iterations is known.
+
+**Example:**
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print("I like", fruit)
+```
+## 🔶 What is an Iterable?
+An iterable is anything Python can loop over — anything that can hand out its items one by one.
+
+### Built-in iterables:
+
+🔻 list
+
+🔻 tuple
+
+🔻 string
+
+🔻 range
+
+🔻 dict
+
+🔻 set
+
+🔻 file
