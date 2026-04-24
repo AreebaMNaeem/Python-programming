@@ -2,7 +2,8 @@
 # ============================================================
 
 # A while loop continues to run a piece of code as long as its condition stays true. 
-# The instant the condition changes to False, the loop stops, and the program moves on.
+# The instant the condition changes to False, the loop stops, and the program moves on. In a while loop, the number of iterations is also not known in advance.
+# A while loop is also called as an uncontrolled loop because it can run indefinitely if the condition never becomes False.
 
 # Key mental model:
 #   → for loop  = "do this FOR each item"   (iteration-driven)
