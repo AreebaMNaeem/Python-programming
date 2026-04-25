@@ -26,7 +26,7 @@ A list is a built-in data structure in Python used to store an ordered collectio
 The most common way to create a list:
 
 ```python
-a = [1, 2, 3, 4, 5]               # List of integers
+a = [1, 2, 3, 4, 5]                # List of integers
 b = ['apple', 'banana', 'cherry']  # List of strings
 c = [1, 'hello', 3.14, True]       # Mixed data types
 
@@ -75,7 +75,7 @@ print(books)
 # ['Deep Work', 'Atomic Habits', 'The Alchemist', 'Rich Dad Poor Dad']
 ```
 
-### 🔶 Updating Elements :
+## 🔶 Updating Elements :
 
 Lists are mutable — assign a new value via index:
 
@@ -86,7 +86,7 @@ prices[2] = 350    # price of item 3 updated after sale
 print(prices)      # [1500, 2999, 350, 8000, 320]
 ```
 
-### 🔶 Removing Elements :
+## 🔶 Removing Elements :
 
 ```python
 # Flight booking — passenger cancelled
@@ -100,7 +100,7 @@ passengers.clear()           # removes ALL elements
 
 ## 🔶 Iterating Over a List :
 
-### Basic `for` Loop
+### Basic `for` Loop :
 
 ```python
 fruits = ['apple', 'banana', 'cherry', 'mango']
@@ -108,7 +108,7 @@ for fruit in fruits:
     print(fruit)         # apple banana cherry mango
 ``` 
 
-### Using `enumerate()` for Index + Value
+### Using `enumerate()` for Index + Value : 
 
 ```python
 tasks = ['Wake up', 'Exercise', 'Study', 'Work']
@@ -122,7 +122,7 @@ for index, task in enumerate(tasks, start=1):
 # 4. Work
 ```
 
-### 🔶 Filtering with a Loop :
+## 🔶 Filtering with a Loop :
 
 ```python
 numbers = [10, 15, 20, 25, 30, 35, 40]
@@ -167,7 +167,8 @@ word_lengths = [len(word) for word in sentence.split()]
 print(word_lengths)  # [6, 2, 3, 3, 8]
 
 uppercase_words = [word.upper() for word in sentence.split() if len(word) > 2]
-print(uppercase_words)  # ['PYTHON', 'AND', 'POWERFUL']
+print(uppercase_words)  # ['PYTHON', 'FUN', 'AND', 'POWERFUL']
+
 ```
 
 ### 🔻Flattening a Nested List
