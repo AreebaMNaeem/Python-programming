@@ -181,4 +181,4 @@ print((a or b) and c)        # True  → parentheses: a or b = True, True and c 
 print(not a or b)            # False → not first: not a = False, False or b = False
 print(not (a or b))          # False → parentheses: a or b = True, not True = False
 
-# ================================================================
+# =================================================================
