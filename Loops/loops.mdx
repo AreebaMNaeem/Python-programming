@@ -24,7 +24,7 @@ Same result. One piece of logic. Works for 3 or 3 million names.
 
 ## 🔶 The Two Types of Loops in Python : 
 
-### 1 .while loop → condition-driven
+### 1. while loop → condition-driven
 "keep going WHILE something is True" . Use when you don't know how many times to repeat.
 
 **Example:**
@@ -61,3 +61,58 @@ An iterable is anything Python can loop over — anything that can hand out its 
 🔻 set
 
 🔻 file
+
+## 🔶 The range() Function :
+
+`range()` generates a sequence of numbers on demand — it does **not** create a list in memory, it produces numbers one at a time. It is the most common tool used with loops.
+
+### It takes 3 parameters:
+
+| `start`| Where the sequence begins and its Optional (default is `0`) 
+| `stop` | Where the sequence ends but (**not included**) and is Always required 
+| `step` | How much to jump each time and its Optional (default is `1`) 
+
+### Syntax:
+```python
+range(stop)                # only stop — start defaults to 0, step defaults to 1
+range(start, stop)         # start and stop — step defaults to 1
+range(start, stop, step)   # all three — full control
+```
+
+### Using only `stop`:
+```python
+for i in range(5):
+    print(i, end=" ")
+# Output: 0 1 2 3 4
+```
+> Start defaults to `0`. Stop is `5` but **5 is not included** — stops at 4.
+
+---
+
+### Using `start` and `stop`:
+```python
+for i in range(2, 8):
+    print(i, end=" ")
+# Output: 2 3 4 5 6 7
+```
+> Starts at `2`, stops before `8`.
+
+---
+### Using `start`, `stop`, and `step`:
+```python
+for i in range(0, 20, 4):
+    print(i, end=" ")
+# Output: 0 4 8 12 16
+```
+> Starts at `0`, stops before `20`, jumps `4` each time.
+
+---
+### Counting DOWN — negative step:
+```python
+for i in range(10, 0, -1):
+    print(i, end=" ")
+# Output: 10 9 8 7 6 5 4 3 2 1
+```
+> Start must be **greater** than stop when using a negative step.
+
+---
