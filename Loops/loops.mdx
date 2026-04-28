@@ -116,3 +116,43 @@ for i in range(10, 0, -1):
 > Start must be **greater** than stop when using a negative step.
 
 ---
+## 🔶 Enumerate() in Python : 
+
+When you loop over a list normally, Python gives you the **value only** — you don't know which position you're at. `enumerate()` solves this by giving you **both the index and the value** at the same time, without manually tracking a counter.
+
+### Without enumerate() — manual and messy:
+```python
+students = ["Alice", "Bob", "Charlie", "David", "Eve"]
+idx = 0
+for student in students:
+    print(f"Student {idx + 1}: {student}")
+    idx += 1
+```
+
+### With enumerate() — clean and simple:
+```python
+students = ["Alice", "Bob", "Charlie", "David", "Eve"]
+for index, student in enumerate(students):
+    print(f"Student {index + 1}: {student}")
+# Output:
+# Student 1: Alice
+# Student 2: Bob
+# Student 3: Charlie
+# Student 4: David
+# Student 5: Eve
+```
+
+> 🔻 By default `enumerate()` starts counting from `0`. We wrote `index + 1` to display it as `1, 2, 3...` instead.
+
+---
+### Using enumerate() to find an item's position:
+```python
+products = ["keyboard", "mouse", "monitor", "webcam"]
+
+for index, product in enumerate(products):
+    if product == "monitor":
+        print(f"  'monitor' is at position {index}")
+        break
+# Output:
+#   'monitor' is at position 2
+```
