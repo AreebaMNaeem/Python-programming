@@ -82,7 +82,7 @@ range(start, stop, step)   # all three — full control
 ### Using only `stop`:
 ```python
 for i in range(5):
-    print(i, end=" ")
+    print(i)
 # Output: 0 1 2 3 4
 ```
 > Start defaults to `0`. Stop is `5` but **5 is not included** — stops at 4.
@@ -92,7 +92,7 @@ for i in range(5):
 ### Using `start` and `stop`:
 ```python
 for i in range(2, 8):
-    print(i, end=" ")
+    print(i)
 # Output: 2 3 4 5 6 7
 ```
 > Starts at `2`, stops before `8`.
@@ -101,7 +101,7 @@ for i in range(2, 8):
 ### Using `start`, `stop`, and `step`:
 ```python
 for i in range(0, 20, 4):
-    print(i, end=" ")
+    print(i)
 # Output: 0 4 8 12 16
 ```
 > Starts at `0`, stops before `20`, jumps `4` each time.
@@ -110,7 +110,7 @@ for i in range(0, 20, 4):
 ### Counting DOWN — negative step:
 ```python
 for i in range(10, 0, -1):
-    print(i, end=" ")
+    print(i)
 # Output: 10 9 8 7 6 5 4 3 2 1
 ```
 > Start must be **greater** than stop when using a negative step.
@@ -156,3 +156,42 @@ for index, product in enumerate(products):
 # Output:
 #   'monitor' is at position 2
 ```
+
+## 🔶 The else statement in loops :
+
+Most beginners don't even know this exists in Python. Both `for` and `while` loops have an optional `else` block.
+
+### The simple rule:
+- `else` runs ✅ — if the loop **finished normally** (condition became False)
+- `else` is skipped ❌ — if the loop was stopped with `break`
+
+### Example of else with a for loop:
+```python
+students = ["Ali", "Sara", "Bilal", "Hina"]
+search = "Zara"
+
+for student in students:
+    if student == search:
+        print(f"  Found: {search}")
+        break
+else:
+    # only runs if we never hit break — meaning Zara was never found
+    print(f"  '{search}' is not in the list")
+# Output: 'Zara' is not in the list
+```
+
+### Example of else with a while loop:
+```python
+attempts = 0
+
+while attempts < 3:
+    print(f"  Attempt {attempts + 1}")
+    attempts += 1
+else:
+    # runs because the condition became False naturally
+    print("  All attempts used — no break occurred")
+```
+
+> 💡 The most common use of `else` in loops is **search problems** — if you find the item you `break`, if you never find it the `else` tells you so. No extra flag variable needed.
+
+---
