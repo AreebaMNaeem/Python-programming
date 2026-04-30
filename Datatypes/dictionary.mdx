@@ -1,0 +1,239 @@
+# 📚 DICTIONARIES IN PYTHON : 
+
+---
+
+## 🔶 What is a Dictionary?
+
+A dictionary in Python is a mutable data structure that stores information as key–value pairs. 
+Think of a dictionary like a **real contact book**. You look up a person's **name** (the key) and it gives you their **phone number** (the value). Every name is unique — you can't have two entries for the same person.
+
+
+```python
+# Real world analogy
+contact_book = {
+    "Ali":   "0300-1234567",
+    "Sara":  "0321-9876543",
+    "Bilal": "0333-1122334"
+}
+```
+
+> **Key characteristics:**
+> 🔻 Keys must be **unique** — no two keys can be the same
+> 🔻 Keys must be **immutable** — strings, numbers, or tuples (not lists)
+> 🔻 Values can be **anything** — strings, numbers, lists, even other dictionaries
+
+
+---
+
+## 🔶 Creating a Dictionary :
+
+### Method 1 — Curly braces `{}` are used t create a dictionary along with a colon that separated the key and value.
+```python
+student = {
+    "name": "Ayesha",
+    "age": 21,
+    "gpa": 3.8,
+    "is_enrolled": True
+}
+print(student)
+# Output: {'name': 'Ayesha', 'age': 21, 'gpa': 3.8, 'is_enrolled': True}
+```
+
+### Method 2 — Using `dict()` constructor:
+```python
+student = dict(name="Ayesha", age=21, gpa=3.8)
+print(student)
+# Output: {'name': 'Ayesha', 'age': 21, 'gpa': 3.8}
+```
+---
+
+## 🔶 Accessing Values : 
+
+### Method 1 — Square brackets `[]`:
+```python
+student = {"name": "Ayesha", "age": 21, "city": "Karachi"}
+
+print(student["name"])   # Ayesha
+print(student["age"])    # 21
+```
+> ⚠️ If the key doesn't exist, this raises a `KeyError` and crashes your program.
+
+```python
+print(student["grade"])  # ❌ KeyError: 'grade'
+```
+
+### Method 2 — `.get()` — safe access with no crash:
+```python
+print(student.get("name"))          # Ayesha
+print(student.get("grade"))         # None  ← no crash, returns None
+print(student.get("grade", "N/A"))  # N/A   ← custom default value
+```
+
+> 💡 **Rule of thumb:** Use `[]` when you're sure the key exists. Use `.get()` when the key might be missing.
+
+---
+
+## 🔶 Adding and Modifying Items : 
+
+```python
+student = {"name": "Ayesha", "age": 21}
+
+# 🔻Adding a new key-value pair
+student["city"] = "Karachi"
+student["gpa"] = 3.8
+
+# 🔻Modifying an existing value
+student["age"] = 22          # age was 21, now updated to 22
+
+print(student)
+# Output: {'name': 'Ayesha', 'age': 22, 'city': 'Karachi', 'gpa': 3.8}
+```
+
+### Updating multiple values at once with `.update()`:
+```python
+student.update({"age": 23, "city": "Lahore", "semester": 6})
+print(student)
+# Output: {'name': 'Ayesha', 'age': 23, 'city': 'Lahore', 'gpa': 3.8, 'semester': 6}
+```
+
+> 💡 `.update()` adds new keys if they don't exist and overwrites values if they do.
+
+---
+
+## 🔶 Removing Items : 
+
+### `del` — remove by key:
+```python
+student = {"name": "Ayesha", "age": 21, "city": "Karachi", "gpa": 3.8}
+
+del student["city"]
+print(student)
+# Output: {'name': 'Ayesha', 'age': 21, 'gpa': 3.8}
+```
+
+### `.pop()` — remove and return the value:
+```python
+removed_age = student.pop("age")
+print(removed_age)   # 21
+print(student)       # {'name': 'Ayesha', 'gpa': 3.8}
+
+### `.popitem()` — remove and return the last inserted item:
+```python
+student = {"name": "Ayesha", "age": 21, "city": "Karachi"}
+
+last_item = student.popitem()
+print(last_item)   # ('city', 'Karachi')
+print(student)     # {'name': 'Ayesha', 'age': 21}
+```
+
+### `.clear()` — remove everything:
+```python
+student.clear()
+print(student)   # {}
+```
+
+---
+
+## 🔶 Checking if a Key Exists  : 
+```python
+student = {"name": "Ayesha", "age": 21, "city": "Karachi"}
+
+# Using 'in' keyword
+print("name" in student)    # True
+print("grade" in student)   # False
+
+# Using 'not in'
+print("phone" not in student)   # True
+
+# Real Life use — check before accessing
+if "gpa" in student:
+    print(student["gpa"])
+else:
+    print("GPA not recorded yet")
+```
+---
+
+## 🔶 Iterating Through a Dictionary : 
+
+### Loop over keys only (default):
+```python
+student = {"name": "Ayesha", "age": 21, "city": "Karachi"}
+
+for key in student:
+    print(key)
+# Output:
+# name
+# age
+# city
+```
+
+### Loop over values only:
+```python
+for value in student.values():
+    print(value)
+# Output:
+# Ayesha
+# 21
+# Karachi
+```
+
+### Loop over both key and value together:
+```python
+for key, value in student.items():
+    print(f"  {key}: {value}")
+# Output:
+#   name: Ayesha
+#   age: 21
+#   city: Karachi
+```
+
+### Real world example — printing a student report:
+```python
+students = {
+    "Ayesha": 88,
+    "Bilal":  72,
+    "Zara":   95,
+    "Omar":   61,
+}
+
+for name, score in students.items():
+    if score >= 90:
+        grade = "A"
+    elif score >= 80:
+        grade = "B"
+    elif score >= 70:
+        grade = "C"
+    else:
+        grade = "D"
+    print(f"  {name:<10} {score}   Grade: {grade}")
+# Output:
+#   Ayesha     88   Grade: B
+#   Bilal      72   Grade: C
+#   Zara       95   Grade: A
+#   Omar       61   Grade: D
+```
+---
+## 🔶 Nested Dictionaries : 
+
+A dictionary whose values are also dictionaries. Very common for structured data like student records, user profiles, and API responses.
+
+```python
+students = {
+    "Ayesha": {
+        "age": 21,
+        "grades": {"math": 90, "physics": 85, "chemistry": 88}
+    },
+    "Bilal": {
+        "age": 22,
+        "grades": {"math": 75, "physics": 80, "chemistry": 70}
+    }
+}
+
+# 🔻Accessing nested values :
+print(students["Ayesha"]["age"])                  # 21
+print(students["Ayesha"]["grades"]["math"])       # 90
+print(students["Bilal"]["grades"]["physics"])     # 80
+
+
+---
+
