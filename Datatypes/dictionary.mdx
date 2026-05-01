@@ -17,11 +17,11 @@ contact_book = {
 }
 ```
 
-> **Key characteristics:**  
+ **Key characteristics:**  
 🔻 Keys must be **unique** — no two keys can be the same  
 🔻 Keys must be **immutable** — strings, numbers, or tuples (not lists)  
 🔻 Values can be **anything** — strings, numbers, lists, even other dictionaries
-> 
+
 ---
 
 ## 🔶 Creating a Dictionary :
@@ -50,7 +50,7 @@ print(student)
 
 ## 🔶 Accessing Values : 
 
-### Method 1 — Square brackets `[]`:
+### Method 1 : Square brackets `[]`:
 ```python
 student = {"name": "Ayesha", "age": 21, "city": "Karachi"}
 
@@ -63,7 +63,7 @@ print(student["age"])    # 21
 print(student["grade"])  # ❌ KeyError: 'grade'
 ```
 
-### Method 2 — `.get()` — safe access with no crash:
+### Method 2 : `.get()` — safe access with no crash:
 ```python
 print(student.get("name"))          # Ayesha
 print(student.get("grade"))         # None  ← no crash, returns None
@@ -79,11 +79,11 @@ print(student.get("grade", "N/A"))  # N/A   ← custom default value
 ```python
 student = {"name": "Ayesha", "age": 21}
 
-# 🔻Adding a new key-value pair
+# Adding a new key-value pair
 student["city"] = "Karachi"
 student["gpa"] = 3.8
 
-# 🔻Modifying an existing value
+# Modifying an existing value
 student["age"] = 22          # age was 21, now updated to 22
 
 print(student)
@@ -103,7 +103,7 @@ print(student)
 
 ## 🔶 Removing Items : 
 
-### `del` — remove by key:
+### `del` : remove by key:
 ```python
 student = {"name": "Ayesha", "age": 21, "city": "Karachi", "gpa": 3.8}
 
@@ -112,13 +112,13 @@ print(student)
 # Output: {'name': 'Ayesha', 'age': 21, 'gpa': 3.8}
 ```
 
-### `.pop()` — remove and return the value:
+### `.pop()` : remove and return the value:
 ```python
 removed_age = student.pop("age")
 print(removed_age)   # 21
 print(student)       # {'name': 'Ayesha', 'gpa': 3.8}
 
-### `.popitem()` — remove and return the last inserted item:
+### `.popitem()` : remove and return the last inserted item:
 ```python
 student = {"name": "Ayesha", "age": 21, "city": "Karachi"}
 
@@ -127,7 +127,7 @@ print(last_item)   # ('city', 'Karachi')
 print(student)     # {'name': 'Ayesha', 'age': 21}
 ```
 
-### `.clear()` — remove everything:
+### `.clear()` : remove everything:
 ```python
 student.clear()
 print(student)   # {}
@@ -230,11 +230,57 @@ students = {
     }
 }
 
-# 🔻Accessing nested values :
+# Accessing nested values :
 print(students["Ayesha"]["age"])                  # 21
 print(students["Ayesha"]["grades"]["math"])       # 90
 print(students["Bilal"]["grades"]["physics"])     # 80
 
-
+# Looping through nested dictionary
+for name, info in students.items():
+    print(f"\n{name}:")
+    print(f"  Age: {info['age']}")
+    for subject, score in info["grades"].items():
+        print(f"  {subject}: {score}")
+```
 ---
+## 🔶 Real World Examples :
+### 🔻 Example 1 : Shopping Cart
 
+```python
+cart = {
+    "apple":   {"price": 50,  "quantity": 3},
+    "bread":   {"price": 120, "quantity": 1},
+    "milk":    {"price": 180, "quantity": 2},
+    "eggs":    {"price": 300, "quantity": 1},
+}
+
+total = 0
+print("======= Your Cart =======")
+for item, details in cart.items():
+    subtotal = details["price"] * details["quantity"]
+    total += subtotal
+    print(f"  {item:<10} x{details['quantity']}   Rs.{subtotal}")
+
+print(f"{'─' * 26}")
+print(f"  Total:          Rs.{total}")
+```
+### 🔻 Example 2 : Tracking Attendance
+
+```python
+attendance = {
+    "Monday":    ["Ali", "Sara", "Bilal", "Hina"],
+    "Tuesday":   ["Ali", "Bilal"],
+    "Wednesday": ["Sara", "Hina", "Omar"],
+    "Thursday":  ["Ali", "Sara", "Bilal", "Hina", "Omar"],
+    "Friday":    ["Ali"],
+}
+
+student_count = {}
+
+for day, students in attendance.items():
+    for student in students:
+        student_count[student] = student_count.get(student, 0) + 1
+
+print("=== Attendance Summary ===")
+for student, days in student_count.items():
+    print(f"  {student:<8} attended {days} day(s)")
