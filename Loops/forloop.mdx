@@ -61,25 +61,81 @@ scores = [88, 72, 95, 61, 79]
 
 for score in scores:
     print(score, end=" ")
-# Output: 88 72 95 61 79
-```
 
+# - List with Condition:
+scores = [88, 72, 95, 61, 79]
+
+for score in scores:
+    if score >= 80:
+        print(f"Passed: {score}")
+    else:
+        print(f"Failed: {score}")
+
+
+# - Nested List (2D — like a table or grid):
+classroom = [
+    ["Ali",   85, "A"],
+    ["Sara",  72, "B"],
+    ["Bilal", 91, "A"],
+]
+
+for row in classroom:
+    name, marks, grade = row
+    print(f"  {name:<8} Marks: {marks}  Grade: {grade}")
+
+# - With enumerate() — Index and Value Together:
+cities = ["Karachi", "Lahore", "Islamabad", "Quetta"]
+
+# Default index starts at 0
+for index, city in enumerate(cities):
+    print(f"  {index}: {city}")
+# Start from 1 — useful for numbered lists
+for index, city in enumerate(cities, start=1):
+    print(f"  {index}. {city}")
+
+```
 ### 🔻 Tuple
 ```python
 coordinates = (10.5, 24.8, -3.2)
 
 for point in coordinates:
     print(point, end=" ")
-# Output: 10.5 24.8 -3.2
-```
 
+# - Nested Tuple:
+city_data = (
+    ("Karachi",   16_000_000),
+    ("Lahore",    13_000_000),
+    ("Islamabad",  1_100_000),
+)
+
+for city, population in city_data:
+    print(f"  {city:<12} Population: {population:,}")
+
+# - With enumerate() on a Tuple
+days = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+
+for index, day in enumerate(days, start=1):
+    label = "Weekend soon!" if index == 5 else ""
+    print(f"  Day {index}: {day}  {label}")
+
+
+```
 ### 🔻 String — every character is an item
 ```python
 city = "Karachi"
 
 for letter in city:
     print(letter, end="-")
-# Output: K-a-r-a-c-h-i-
+
+# - Loop Over a List of Strings
+names = ["Ali", "Sara", "Bilal"]
+
+for name in names:
+    print(f"{name}:", end=" ")
+    for char in name:
+        print(char, end=".")
+    print() 
+
 ```
 
 ### 🔻 Set — order is not guaranteed
@@ -88,97 +144,68 @@ unique_ids = {101, 203, 305, 407}
 
 for uid in unique_ids:
     print(uid, end=" ")
-# Output: (some order — sets are unordered)
+    
+# - Filtering with a Set (fast membership check):
+banned_users = {"spammer99", "bot123", "fake_acc"}
+logins = ["ali_k", "spammer99", "sara_m", "bot123", "bilal_dev"]
+
+for user in logins:
+    if user in banned_users:
+        print(f"  ❌ Blocked:  {user}")
+    else:
+        print(f"  ✅ Allowed:  {user}")
+
+# - Iterating Set Operations:
+python_students = {"Ali", "Sara", "Bilal", "Hina"}
+java_students   = {"Sara", "Hina", "Usman", "Zara"}
+
+print("Students in BOTH courses:")
+for student in python_students & java_students:   # intersection
+    print(f"  {student}")
+
+print("Students in Python only:")
+for student in python_students - java_students:   # difference
+    print(f"  {student}")
+
 ```
 
 ### 🔻 Dictionary — by default gives keys
 ```python
 student = {"name": "Ayesha", "age": 21, "gpa": 3.8}
 
-# Keys only (default)
+# - Keys only (default):
 for key in student:
     print(key, end=" ")
 # Output: name age gpa
 
-# Values only
+# - Values only:
 for value in student.values():
     print(value, end=" ")
 # Output: Ayesha 21 3.8
 
-# Both key and value
+# - Both key and value:
 for key, value in student.items():
     print(f"  {key}: {value}")
 # Output:
 #   name: Ayesha
 #   age: 21
 #   gpa: 3.8
+
+# Nested Dictionary: 
+hostel = {
+    "Room 1": {"occupant": "Ali",   "rent": 8000},
+    "Room 2": {"occupant": "Sara",  "rent": 9500},
+    "Room 3": {"occupant": "Bilal", "rent": 8500},
+}
+
+total = 0
+for room, info in hostel.items():
+    print(f"{room} : {info['occupant']} Rs.{info['rent']}")
+    total += info["rent"]
+
+print(f"Total Rent Rs.{total}")
+
 ```
-
----
-
-## 🔶 range() with For Loop
-
-
-```python
-# range(stop) — starts at 0
-for i in range(5):
-    print(i, end=" ")
-# Output: 0 1 2 3 4
-
-# range(start, stop) — custom start
-for i in range(2, 8):
-    print(i, end=" ")
-# Output: 2 3 4 5 6 7
-
-# range(start, stop, step) — jump by step
-for i in range(0, 20, 4):
-    print(i, end=" ")
-# Output: 0 4 8 12 16
-
-# Repeat N times — use _ when you don't need the value
-for _ in range(3):
-    print("hello", end=" ")
-# Output: hello hello hello
-```
-
-> 💡 `range(5)` gives `0 1 2 3 4` — starts at **0**, not 1. Use `range(1, 6)` for `1 2 3 4 5`.
-
----
-
-## 🔶 enumerate() — Index and Value Together
-
-By default a `for` loop gives you the value only. `enumerate()` gives you **both the index and the value** at the same time.
-
-```python
-subjects = ["Math", "Physics", "Chemistry", "Biology"]
-
-# Without enumerate — messy manual tracking
-idx = 0
-for subject in subjects:
-    print(f"{idx}: {subject}")
-    idx += 1
-
-# With enumerate — clean
-for index, subject in enumerate(subjects):
-    print(f"  {index}: {subject}")
-# Output:
-#   0: Math
-#   1: Physics
-#   2: Chemistry
-#   3: Biology
-
-# Start from 1 instead of 0
-for index, subject in enumerate(subjects, start=1):
-    print(f"  {index}. {subject}")
-# Output:
-#   1. Math
-#   2. Physics
-#   3. Chemistry
-#   4. Biology
-```
-
-> 💡 Always prefer `enumerate()` over manually tracking an index variable. It is cleaner and less error prone.
-
 ---
 
 ## 🔶 zip() — Loop Over Multiple Lists Together
@@ -208,7 +235,6 @@ for a, b in zip(short, long):
     print(a, b, end=" | ")
 # Output: 1 10 | 2 20 | 3 30   (40 and 50 ignored)
 ```
-
 ---
 
 ## 🔶 Loop Control — break, continue, pass
@@ -295,13 +321,6 @@ else:
 ## 🔶 Nested For Loops
 
 A loop inside a loop. For every **one** iteration of the outer loop, the inner loop runs **all** its iterations.
-
-```python
-# Multiplication table
-for row in range(1, 4):
-    for col in range(1, 4):
-        print(f"  {row} x {col} = {row * col}")
-```
 
 ```python
 # Pairing every student with every subject
@@ -483,19 +502,7 @@ for num in numbers[:]:
 print(numbers)   # [1, 3, 5]
 ```
 
-### ❌ Mistake 3 — Thinking range(5) starts at 1:
-```python
-for i in range(5):
-    print(i, end=" ")
-# Actual output: 0 1 2 3 4  ← starts at 0, NOT 1
-
-# Fix — if you want 1 to 5:
-for i in range(1, 6):
-    print(i, end=" ")
-# Output: 1 2 3 4 5
-```
-
-### ❌ Mistake 4 — Loop variable persists after the loop ends:
+### ❌ Mistake 3 — Loop variable persists after the loop ends:
 ```python
 for item in ["apple", "banana", "cherry"]:
     pass
