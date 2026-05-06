@@ -367,105 +367,101 @@ print(even_squares)   # [4, 16, 36, 64, 100]
 
 ### 🔻 Example 1 — Student Report Card
 ```python
+print("=== Report Card ===")
+print("-" * 30)
+
 students = {
-    "Ayesha": {"math": 90, "physics": 85, "chemistry": 88},
-    "Bilal":  {"math": 75, "physics": 80, "chemistry": 70},
-    "Zara":   {"math": 95, "physics": 92, "chemistry": 97},
+    "Ayesha": {"Math": 90, "Physics": 85, "Chemistry": 88},
+    "Bilal":  {"Math": 75, "Physics": 80, "Chemistry": 70},
+    "Zara":   {"Math": 95, "Physics": 92, "Chemistry": 97},
 }
 
-print("=== Report Card ===")
 for name, subjects in students.items():
     average = sum(subjects.values()) / len(subjects)
-    grade = "A" if average >= 90 else "B" if average >= 80 else "C"
-    print(f"\n  {name}")
+
+    # Grade assignment using if/elif/else
+    if average >= 90:
+        grade = "A"
+    elif average >= 80:
+        grade = "B"
+    else:
+        grade = "C"
+
+    print(f"\n{name}")
     for subject, score in subjects.items():
-        print(f"    {subject:<12} {score}")
-    print(f"    {'Average':<12} {average:.1f}  →  Grade {grade}")
-# Output:
-#   Ayesha
-#     math         90
-#     physics      85
-#     chemistry    88
-#     Average      87.7  →  Grade B
+        print(f"  {subject:} {score}")
+    print(f"  {'Average':} {average:.1f}  →  Grade {grade}")
 ```
 
 ---
 
 ### 🔻 Example 2 — Restaurant Bill Calculator
 ```python
-menu  = {"biryani": 350, "karahi": 550, "naan": 30, "lassi": 120}
-order = ["biryani", "naan", "naan", "lassi", "karahi"]
+print("====== Bill ======")
+print("-" * 30)
+
+menu = {
+    "Biryani": 350,
+    "Karahi": 550,
+    "Naan": 30,
+    "Lassi": 120,
+}
+
+order = ["Biryani", "Naan", "Naan", "Lassi", "Karahi"]
 
 bill = {}
 for item in order:
     bill[item] = bill.get(item, 0) + menu[item]
 
-print("====== Bill ======")
 for item, amount in bill.items():
-    print(f"  {item:<12} Rs.{amount}")
-print(f"{'─' * 22}")
-print(f"  {'Total':<12} Rs.{sum(bill.values())}")
-# Output:
-# ====== Bill ======
-#   biryani      Rs.350
-#   naan         Rs.60
-#   lassi        Rs.120
-#   karahi       Rs.550
-#   ──────────────────────
-#   Total        Rs.1080
+    print(f"  {item:} Rs.{amount}")
+print("-" * 30)
+print(f"  {'Total':} Rs.{sum(bill.values())}")
 ```
 
 ---
 
 ### 🔻 Example 3 — Filtering Employees by Department
 ```python
+
+print("=== Engineering Team ===")
 employees = [
     {"name": "Usman",  "dept": "Engineering", "salary": 85000},
     {"name": "Fatima", "dept": "Design",       "salary": 72000},
     {"name": "Hamza",  "dept": "Engineering",  "salary": 91000},
     {"name": "Nadia",  "dept": "Marketing",    "salary": 67000},
 ]
-
-print("=== Engineering Team ===")
 total = 0
 for emp in employees:
     if emp["dept"] == "Engineering":
-        print(f"  {emp['name']:<10} Rs.{emp['salary']:,}")
+        print(f"  {emp['name']}: Rs.{emp['salary']:,}")
         total += emp["salary"]
 print(f"{'─' * 28}")
-print(f"  {'Total Payroll':<10} Rs.{total:,}")
-# Output:
-# === Engineering Team ===
-#   Usman      Rs.85,000
-#   Hamza      Rs.91,000
-#   ────────────────────────────
-#   Total Payroll Rs.176,000
+print(f"  {'Total Payroll':} Rs.{total:,}")
+
 ```
 
 ---
 
 ### 🔻 Example 4 — Voting Results
 ```python
-ballot = ["Ali", "Sara", "Ali", "Bilal", "Sara", "Ali", "Sara", "Bilal", "Ali"]
-votes = {}
+print("=== Election Results ===")
+print("-" * 30)
 
+ballot = ["Ali", "Sara", "Ali", "Bilal", "Sara", "Ali", "Sara", "Bilal", "Ali"]
+
+votes = {}
 for vote in ballot:
     votes[vote] = votes.get(vote, 0) + 1
 
-print("=== Election Results ===")
 for candidate, count in votes.items():
     bar = "█" * count
     print(f"  {candidate:<8} {bar} ({count})")
 
 winner = max(votes, key=votes.get)
-print(f"\n🏆 Winner: {winner} with {votes[winner]} votes")
-# Output:
-# === Election Results ===
-#   Ali      ████ (4)
-#   Sara     ███ (3)
-#   Bilal    ██ (2)
-#
-# 🏆 Winner: Ali with 4 votes
+print("-" * 30)
+print(f"🏆 Winner: {winner} with {votes[winner]} votes")
+
 ```
 
 ---
