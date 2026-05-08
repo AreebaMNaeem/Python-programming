@@ -14,7 +14,7 @@ numbers = {1, 2, 3, 2, 1, 4, 3}
 print(numbers)   # {1, 2, 3, 4}  ← only unique values kept
 ```
 
-> 💡 **Three things that define a set:**
+> 💡 **Three things that define a set:**  
 > 🔻 **Unordered** — items have no fixed position, no index.  
 > 🔻 **Unique** — duplicates are silently dropped.  
 > 🔻 **Mutable** — you can add or remove items after creation.  
@@ -205,7 +205,7 @@ print(permissions_editor.issuperset(permissions_admin))   # False
 backend_skills  = {"python", "django", "postgresql"}
 frontend_skills = {"react", "css", "javascript"}
 print(backend_skills.isdisjoint(frontend_skills))   # True — nothing in common
-
+```
 
 ---
 
@@ -229,9 +229,9 @@ for language in programming_languages:
 for language in sorted(programming_languages):
     print(f"  {language}")
 # Output: Go, Java, JavaScript, Python, Rust  (alphabetical)
-```
 
 > 💡 Sets are **unordered** — if you need consistent order while looping, wrap with `sorted()`.
+```
 
 ---
 
@@ -282,55 +282,45 @@ for email in sorted(unique_emails):
 
 ---
 
-### 🔻 Example 2 — Skill Matching for a Job
+### 🔻 Example 2 — Online Store Order vs Stock
 ```python
-required_skills = {"python", "sql", "git", "django", "postgresql"}
+customer_order = {"laptop", "mouse", "keyboard", "webcam", "headphones"}
+in_stock       = {"mouse", "keyboard", "monitor", "webcam", "charger"}
+out_of_stock   = {"laptop", "headphones", "usb_hub"}
 
-applicant_ali  = {"python", "sql", "git", "excel", "powerbi"}
-applicant_sara = {"python", "sql", "git", "django", "postgresql", "docker"}
+can_ship = customer_order & in_stock
+print(f"Can ship now     : {can_ship}")
 
-def evaluate(name, applicant, required):
-    matched = applicant & required
-    missing = required - applicant
-    extra   = applicant - required
-    score   = len(matched) / len(required) * 100
+cannot_ship = customer_order - in_stock
+print(f"Cannot ship      : {cannot_ship}")
 
-    print(f"\n  {name}")
-    print(f"  Matched : {matched}")
-    print(f"  Missing : {missing}")
-    print(f"  Extra   : {extra}")
-    print(f"  Score   : {score:.0f}%")
+not_ordered = in_stock - customer_order
+print(f"In stock but not ordered: {not_ordered}")
 
-evaluate("Ali",  applicant_ali,  required_skills)
-evaluate("Sara", applicant_sara, required_skills)
-
-
+fully_available = customer_order.issubset(in_stock)
+print(f"\nOrder fully available? : {fully_available}")
 ```
-
 ---
 
-### 🔻 Example 3 — Social Media Mutual Friends
+### 🔻 Example 3 — Restaurant Menu vs Customer Allergies
 ```python
-friends = {
-    "Ali":   {"Sara", "Bilal", "Hina", "Omar"},
-    "Sara":  {"Ali", "Bilal", "Zara", "Nadia"},
-    "Bilal": {"Ali", "Sara", "Omar", "Zara"},
+dish_ingredients = {
+    "biryani":  {"rice", "chicken", "spices", "oil", "onion"},
+    "pasta":    {"pasta", "cheese", "milk", "cream", "garlic"},
+    "salad":    {"lettuce", "tomato", "cucumber", "olive_oil"},
+    "burger":   {"bun", "beef", "cheese", "lettuce", "mayo"},
 }
 
-def mutual_friends(person_a, person_b):
-    return friends[person_a] & friends[person_b]
+customer_allergies = {"milk", "cheese", "cream"}
 
-def suggestions(person):
-    all_friends_of_friends = set()
-    for friend in friends[person]:
-        if friend in friends:
-            all_friends_of_friends |= friends[friend]
-    return all_friends_of_friends - friends[person] - {person}
+print("=== Menu Safety Check ===")
+for dish, ingredients in dish_ingredients.items():
+    allergens_in_dish = ingredients & customer_allergies
 
-print("Ali & Sara mutual friends :", mutual_friends("Ali", "Sara"))
-print("Suggestions for Ali       :", suggestions("Ali"))
-
-
+    if allergens_in_dish:
+        print(f"  ❌ {dish:<10} — contains: {allergens_in_dish}")
+    else:
+        print(f"  ✅ {dish:<10} — safe to eat")
 ```
 
 ---
@@ -354,5 +344,4 @@ else:
     print(f"  No unregistered attendees")
 
 ```
-
 ---
