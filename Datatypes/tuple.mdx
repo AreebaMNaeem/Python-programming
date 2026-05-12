@@ -13,10 +13,10 @@ print(pakistan_provinces)
 # Output: ('Punjab', 'Sindh', 'KPK', 'Balochistan', 'Gilgit')
 ```
 
-> 💡 **Four things that define a tuple:**
+> 💡 **Four things that define a tuple:**  
 > 🔻 **Ordered** — items stay in the position you put them  
 > 🔻**Immutable** — cannot be changed after creation  
-> 🔻**Allows duplicates** — same value can appear multiple times
+> 🔻**Allows duplicates** — same value can appear multiple times  
 > 🔻**Mixed types** — can hold integers, strings, floats, even other tuples
 
 ---
@@ -66,13 +66,12 @@ print(type(is_a_tuple))     # <class 'tuple'>
 # Also right — without parentheses
 also_a_tuple = 42,
 print(type(also_a_tuple))   # <class 'tuple'>
+
+> A single item tuple **must** have a trailing comma. The comma makes it a tuple, not the parentheses.
 ```
-
-> ⚠️ A single item tuple **must** have a trailing comma. The comma makes it a tuple, not the parentheses.
-
 ---
 
-## 🔶 Immutability — The Core Feature 
+## 🔶 Immutability :
 
 Once a tuple is created, its contents cannot be changed. This is not a bug — it is the entire point.
 
@@ -101,13 +100,11 @@ student = ("Ayesha", [88, 92, 75])   # list inside tuple
 student[1].append(96)           # modifying the list — allowed
 student[1][0] = 90              # changing list item — allowed
 print(student)                  # ('Ayesha', [90, 92, 75, 96])
+> The tuple's **reference** to the list is immutable. The list itself is still mutable.
 ```
-
-> 💡 The tuple's **reference** to the list is immutable. The list itself is still mutable.
-
 ---
 
-## 🔶 Accessing Elements
+## 🔶 Accessing Elements:
 
 ### Indexing — positive and negative:
 ```python
@@ -116,23 +113,18 @@ flight = ("PK-302", "Karachi", "Lahore", "14:30", "16:00")
 #          -5          -4         -3        -2       -1
 
 print(flight[0])    # PK-302   ← first item
-print(flight[2])    # Lahore   ← third item
-print(flight[-1])   # 16:00    ← last item
 print(flight[-2])   # 14:30    ← second from last
 ```
 
 ### Slicing — extract a portion:
 ```python
 print(flight[1:3])    # ('Karachi', 'Lahore')  → index 1 and 2
-print(flight[:3])     # ('PK-302', 'Karachi', 'Lahore')  → first 3
-print(flight[3:])     # ('14:30', '16:00')  → from index 3 onward
 print(flight[::2])    # ('PK-302', 'Lahore', '16:00')  → every 2nd item
 print(flight[::-1])   # reversed tuple
 ```
-
 ---
 
-## 🔶 Tuple Unpacking
+## 🔶 Tuple Unpacking :
 
 Unpacking lets you assign each element of a tuple to a separate variable in one clean line.
 
@@ -155,13 +147,8 @@ employees = [
 ]
 
 for name, role, salary in employees:   # unpacks each tuple
-    print(f"  {name:<8} {role:<12} Rs.{salary:,}")
-# Output:
-#   Ali      Engineer     Rs.85,000
-#   Sara     Designer     Rs.72,000
-#   Bilal    Manager      Rs.91,000
-```
-
+    print(f"  {name:} {role:} Rs.{salary:,}")
+``` 
 ---
 
 ## 🔶 Tuple Methods :
@@ -181,16 +168,13 @@ print(grades.count(100))   # 0  → not found, no error
 cities = ("Karachi", "Lahore", "Islamabad", "Peshawar", "Lahore")
 
 print(cities.index("Islamabad"))   # 2  → found at index 2
-print(cities.index("Lahore"))      # 1  → first occurrence only
-
 # cities.index("Quetta")   ← ValueError if not found
-# Safe way — check first
+# Safe way — check first : 
 if "Quetta" in cities:
     print(cities.index("Quetta"))
 else:
     print("Quetta not in tuple")
 ```
-
 ---
 
 ## 🔶 Tuple Operations : 
@@ -227,20 +211,9 @@ else:
     print(f"  {uploaded_file} ❌ not allowed")
 # Output: photo.png ✅ allowed
 ```
-
-### Length, min, max, sum:
-```python
-test_scores = (78, 92, 65, 88, 95, 71, 84)
-
-print(len(test_scores))    # 7
-print(min(test_scores))    # 65
-print(max(test_scores))    # 95
-print(sum(test_scores))    # 573
-print(sum(test_scores) / len(test_scores))   # 81.857... average
-```
 ---
 
-## 🔶 Looping Over Tuples
+## 🔶 Looping Over Tuples :
 
 ### Basic for loop:
 ```python
@@ -254,12 +227,6 @@ for subject in subjects:
 ```python
 for index, subject in enumerate(subjects, start=1):
     print(f"  {index}. {subject}")
-# Output:
-#   1. Math
-#   2. Physics
-#   3. Chemistry
-#   4. Biology
-#   5. English
 ```
 
 ### With while loop — manual index control:
@@ -268,34 +235,32 @@ scores = (88, 72, 95, 61, 79)
 i = 0
 
 while i < len(scores):
-    status = "Pass ✅" if scores[i] >= 70 else "Fail ❌"
+    if scores[i] >= 70:
+        status = "Pass ✅"
+    else:
+        status = "Fail ❌"
     print(f"  Score {scores[i]:>3}  →  {status}")
     i += 1
-# Output:
-#   Score  88  →  Pass ✅
-#   Score  72  →  Pass ✅
-#   Score  95  →  Pass ✅
-#   Score  61  →  Fail ❌
-#   Score  79  →  Pass ✅
+
 ```
 
 ### Search with break:
 ```python
-suspects = ("Ali", "Sara", "Bilal", "Hina", "Omar")
-target = "Bilal"
+fruits = ("Apple", "Banana", "Mango", "Orange", "Grapes")
+target = "Mango"
 
-for i, name in enumerate(suspects):
-    if name == target:
+for i, fruit in enumerate(fruits):
+    if fruit == target:
         print(f"  Found '{target}' at position {i}")
         break
 else:
     print(f"  '{target}' not found")
-# Output: Found 'Bilal' at position 2
+
+# Output: Found 'Mango' at position 2
+
 ```
-
 ---
-
-## 🔶 Nested Tuples
+## 🔶 Nested Tuples:
 
 A tuple containing other tuples — very common for representing structured fixed data like coordinates, records, or tables.
 
@@ -321,39 +286,11 @@ students = (
 print("\n=== Student Records ===")
 for roll, name, dept, gpa in students:
     print(f"  {roll}  {name:<8}  {dept:<8}  GPA: {gpa}")
-# Output:
-# === Student Records ===
-#   101  Ayesha    CS        GPA: 3.9
-#   102  Bilal     EE        GPA: 3.5
-#   103  Zara      Physics   GPA: 3.7
-```
 
+```
 ---
 
-## 🔶 When to Use a Tuple vs a List
-
-| | Tuple | List |
-|---|---|---|
-| **Mutable?** | ❌ No — fixed after creation | ✅ Yes — can change anytime |
-| **Syntax** | `(1, 2, 3)` | `[1, 2, 3]` |
-| **Speed** | ✅ Faster | ❌ Slightly slower |
-| **Memory** | ✅ Less | ❌ More |
-| **Methods** | Only `.count()` and `.index()` | 11+ methods |
-| **Use when** | Data should never change | Data needs to change |
-| **Examples** | GPS, RGB, DB records, config | Shopping cart, student list |
-
-```python
-# Use TUPLE — coordinates never change
-location = (24.8607, 67.0011)
-
-# Use LIST — cart items change as user adds/removes
-shopping_cart = ["biryani", "naan", "lassi"]
-shopping_cart.append("karahi")
-```
-
----
-
-## 🔶 Real World Examples
+## 🔶 Real World Examples :
 
 ### 🔻 Example 1 — Flight Information (Fixed Data)
 ```python
@@ -369,15 +306,7 @@ print("=" * 55)
 
 for flight_no, origin, dest, dep, arr in flights:
     print(f"  {flight_no:<8} {origin:<12} {dest:<12} {dep:>6} {arr:>6}")
-# Output:
-# =======================================================
-#   Flight   From         To           Dep    Arr
-# =======================================================
-#   PK-302   Karachi      Lahore       06:00  07:30
-#   PK-401   Islamabad    Karachi      09:15  10:45
-#   PK-510   Lahore       Islamabad    13:00  14:00
 ```
-
 ---
 
 ### 🔻 Example 2 — RGB Color Palette
@@ -393,162 +322,6 @@ color_palette = (
 print("=== Color Palette ===")
 for color_name, (r, g, b) in color_palette:   # nested unpacking
     print(f"  {color_name:<8}  R:{r:>3}  G:{g:>3}  B:{b:>3}")
-# Output:
-# === Color Palette ===
-#   Red       R:255  G:  0  B:  0
-#   Green     R:  0  G:255  B:  0
-#   Blue      R:  0  G:  0  B:255
-#   Orange    R:255  G:165  B:  0
-#   Purple    R:128  G:  0  B:128
-```
 
+```
 ---
-
-### 🔻 Example 3 — Monthly Sales Report (Read-Only Records)
-```python
-monthly_sales = (
-    ("January",   125000),
-    ("February",  98000 ),
-    ("March",     143000),
-    ("April",     167000),
-    ("May",       112000),
-)
-
-total   = 0
-highest = monthly_sales[0]
-lowest  = monthly_sales[0]
-
-print("=== Monthly Sales ===")
-for month, sales in monthly_sales:
-    bar = "█" * (sales // 10000)
-    print(f"  {month:<10} Rs.{sales:>8,}  {bar}")
-    total += sales
-    if sales > highest[1]:
-        highest = (month, sales)
-    if sales < lowest[1]:
-        lowest = (month, sales)
-
-print(f"\n  Total   : Rs.{total:,}")
-print(f"  Best    : {highest[0]} — Rs.{highest[1]:,}")
-print(f"  Weakest : {lowest[0]} — Rs.{lowest[1]:,}")
-print(f"  Average : Rs.{total // len(monthly_sales):,}")
-```
-
----
-
-### 🔻 Example 4 — Leaderboard (Ranked Fixed Data)
-```python
-leaderboard = (
-    (1, "Zara",   9850),
-    (2, "Ali",    9200),
-    (3, "Bilal",  8750),
-    (4, "Hina",   8100),
-    (5, "Omar",   7650),
-)
-
-print("🏆 Top 5 Leaderboard")
-print("─" * 30)
-for rank, player, score in leaderboard:
-    medal = "🥇" if rank == 1 else "🥈" if rank == 2 else "🥉" if rank == 3 else f"#{rank}"
-    print(f"  {medal}  {player:<8}  {score:,} pts")
-# Output:
-# 🏆 Top 5 Leaderboard
-# ──────────────────────────────
-#   🥇  Zara      9,850 pts
-#   🥈  Ali       9,200 pts
-#   🥉  Bilal     8,750 pts
-#   #4  Hina      8,100 pts
-#   #5  Omar      7,650 pts
-```
-
----
-
-## 🔶 Common Mistakes
-
-### ❌ Mistake 1 — Forgetting the comma for single-item tuple:
-```python
-wrong = ("hello")        # this is just a string!
-right = ("hello",)       # this is a tuple ✅
-
-print(type(wrong))   # <class 'str'>
-print(type(right))   # <class 'tuple'>
-```
-
-### ❌ Mistake 2 — Trying to modify a tuple:
-```python
-config = ("localhost", 5432, "mydb")
-
-# config[1] = 9000     ← TypeError ❌
-
-# If you truly need to change it — convert, modify, convert back
-config = list(config)
-config[1] = 9000
-config = tuple(config)
-print(config)   # ('localhost', 9000, 'mydb') ✅
-```
-
-### ❌ Mistake 3 — Using `.index()` without checking first:
-```python
-cities = ("Karachi", "Lahore", "Islamabad")
-
-# cities.index("Quetta")   ← ValueError ❌
-
-# Safe way — always check with 'in' first
-if "Quetta" in cities:
-    print(cities.index("Quetta"))
-else:
-    print("Not found")    # ✅ no crash
-```
-
-### ❌ Mistake 4 — Confusing tuple with list when you need to modify:
-```python
-# Wrong choice — using a tuple for data that changes
-# cart = ("biryani", "naan")
-# cart.append("lassi")    ← AttributeError ❌
-
-# Right choice — use a list for data that changes
-cart = ["biryani", "naan"]
-cart.append("lassi")      # ✅
-print(cart)
-```
-
----
-
-## 🔶 Quick Reference
-
-```
-Creating:
-  t = (1, 2, 3)              # parentheses
-  t = 1, 2, 3                # packing — no parentheses
-  t = (42,)                  # single item — trailing comma required
-  t = tuple([1, 2, 3])       # from list
-
-Accessing:
-  t[0]                       # first item
-  t[-1]                      # last item
-  t[1:4]                     # slicing
-
-Unpacking:
-  a, b, c = t                # each element to a variable
-  a, *rest = t               # first + collect the rest
-  x, y = y, x                # swap variables
-
-Methods (only 2):
-  t.count(x)                 # how many times x appears
-  t.index(x)                 # first position of x
-
-Operations:
-  t1 + t2                    # concatenate
-  t * 3                      # repeat
-  x in t                     # membership check
-  len(t), min(t), max(t), sum(t)
-
-Looping:
-  for item in t:             # basic
-  for i, item in enumerate(t): # with index
-  for a, b in t:             # unpacking pairs
-
-Tuple vs List:
-  Tuple → fixed data, faster, less memory, immutable
-  List  → changing data, more methods, mutable
-```
