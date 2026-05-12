@@ -14,10 +14,10 @@ print(pakistan_provinces)
 ```
 
 > 💡 **Four things that define a tuple:**
-> - **Ordered** — items stay in the position you put them
-> - **Immutable** — cannot be changed after creation
-> - **Allows duplicates** — same value can appear multiple times
-> - **Mixed types** — can hold integers, strings, floats, even other tuples
+> 🔻 **Ordered** — items stay in the position you put them  
+> 🔻**Immutable** — cannot be changed after creation  
+> 🔻**Allows duplicates** — same value can appear multiple times
+> 🔻**Mixed types** — can hold integers, strings, floats, even other tuples
 
 ---
 
@@ -72,7 +72,7 @@ print(type(also_a_tuple))   # <class 'tuple'>
 
 ---
 
-## 🔶 Immutability — The Core Feature
+## 🔶 Immutability — The Core Feature 
 
 Once a tuple is created, its contents cannot be changed. This is not a bug — it is the entire point.
 
@@ -146,32 +146,6 @@ print(role)    # Senior Developer
 print(salary)  # 120000
 ```
 
-### Extended unpacking with `*`:
-```python
-first, *middle, last = (10, 20, 30, 40, 50)
-print(first)    # 10
-print(middle)   # [20, 30, 40]  ← becomes a list
-print(last)     # 50
-
-# Grab first two, collect the rest
-a, b, *rest = ("Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta")
-print(a)       # Karachi
-print(b)       # Lahore
-print(rest)    # ['Islamabad', 'Peshawar', 'Quetta']
-```
-
-### Swapping variables — the Pythonic way:
-```python
-x = 100
-y = 200
-
-x, y = y, x     # tuple packing and unpacking in one line
-
-print(x)    # 200
-print(y)    # 100
-# No temp variable needed — Python uses tuple swap internally
-```
-
 ### Unpacking in a loop:
 ```python
 employees = [
@@ -190,7 +164,7 @@ for name, role, salary in employees:   # unpacks each tuple
 
 ---
 
-## 🔶 Tuple Methods
+## 🔶 Tuple Methods :
 
 Tuples are immutable so they only have **two built-in methods**:
 
@@ -199,7 +173,6 @@ Tuples are immutable so they only have **two built-in methods**:
 grades = (88, 72, 95, 88, 61, 88, 79, 95)
 
 print(grades.count(88))    # 3  → appears 3 times
-print(grades.count(95))    # 2  → appears 2 times
 print(grades.count(100))   # 0  → not found, no error
 ```
 
@@ -220,7 +193,7 @@ else:
 
 ---
 
-## 🔶 Tuple Operations
+## 🔶 Tuple Operations : 
 
 ### Concatenation — join two tuples:
 ```python
@@ -265,7 +238,6 @@ print(max(test_scores))    # 95
 print(sum(test_scores))    # 573
 print(sum(test_scores) / len(test_scores))   # 81.857... average
 ```
-
 ---
 
 ## 🔶 Looping Over Tuples
