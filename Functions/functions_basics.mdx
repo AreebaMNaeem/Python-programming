@@ -99,7 +99,7 @@ introduce("Hassan", 22, "Karachi")
 3.Keyword arguments → Values are matched by name.
 4.Variable-length arguments: *args and **kwargs
 
-🔻Positional arguments: These must be given in the same order as defined in the function.
+🔻**Positional arguments:**These must be given in the same order as defined in the function.
 ```python
 def calculate_rectangle(length, width):
     area = length * width
@@ -109,7 +109,7 @@ calculate_rectangle(10, 5)    # length=10, width=5  ✅
 calculate_rectangle(5, 10)    # length=5, width=10  ✅ (different result)
 ```
 
-🔻Default arguments: Have default values
+🔻**Default arguments:** Have default values
 
 You can give parameters default values. If the caller doesn't provide an argument, the default is used.
 
@@ -121,7 +121,7 @@ greet("Ali")                    # Hello, Ali!  (uses default)
 greet("Sara", "Assalam o Alaikum")  # Assalam o Alaikum, Sara!  (overrides default)
 ```
 
-### Rules for default parameters:
+Rules for default parameters:
 1. Default parameters must come **after** non-default parameters
 2. Once you use a default, all parameters after it must also have defaults
 
@@ -135,8 +135,7 @@ def example(a, b=10, c):
     pass
 ```
 
-🔻Keyword Arguments:
-
+🔻**Keyword Arguments:**
 Instead of relying on position, you can specify which parameter gets which value by **name**.
 
 ```python
@@ -153,9 +152,9 @@ book_ticket(destination="Lahore", seat_class="Economy", passenger="Ali")
 book_ticket(seat_class="Business", passenger="Sara", destination="Islamabad")
 ```
 
-**When to use:** When a function has many parameters and you want to be explicit about which is which.
+When to use: When a function has many parameters and you want to be explicit about which is which.
 
-🔻Required vs Optional Parameters: 
+🔻**Required vs Optional Parameters:**
 ```python
 def make_sandwich(bread, filling, sauce=None, drink=None):
     """
