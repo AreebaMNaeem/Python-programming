@@ -10,13 +10,13 @@ A **function** is a reusable block of code with a name. You write it once, then 
 
 ## 🔶 Why Use Functions?
 
-### 1. **Reusability** — write once, use many times(DRY principle)
+1. **Reusability** — write once, use many times(DRY principle)
 
-### 2. **Organization** — break big problems into small pieces
+2. **Organization** — break big problems into small pieces
 
-### 3. **Readability** — good names make code self-explaining
+3. **Readability** — good names make code self-explaining
 
-### 4. **Testing** — test small pieces one at a time
+4. **Testing** — test small pieces one at a time
 
 ---
 
@@ -91,8 +91,15 @@ introduce("Hassan", 22, "Karachi")
 # I am 22 years old
 # I live in Karachi
 ```
+---
 
-### Order matters (positional arguments):
+## 🔶 Different types of Arguments:
+1.Positional arguments → Values are passed in the correct order.
+2.Default arguments → Pre-set values are used if none are given.
+3.Keyword arguments → Values are matched by name.
+4.Variable-length arguments: *args and **kwargs
+
+🔻Positional arguments: These must be given in the same order as defined in the function.
 ```python
 def calculate_rectangle(length, width):
     area = length * width
@@ -102,9 +109,76 @@ calculate_rectangle(10, 5)    # length=10, width=5  ✅
 calculate_rectangle(5, 10)    # length=5, width=10  ✅ (different result)
 ```
 
+🔻Default arguments: Have default values
+
+You can give parameters default values. If the caller doesn't provide an argument, the default is used.
+
+```python
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet("Ali")                    # Hello, Ali!  (uses default)
+greet("Sara", "Assalam o Alaikum")  # Assalam o Alaikum, Sara!  (overrides default)
+```
+
+### Rules for default parameters:
+1. Default parameters must come **after** non-default parameters
+2. Once you use a default, all parameters after it must also have defaults
+
+```python
+# ✅ Correct
+def example(a, b, c=10, d=20):
+    pass
+
+# ❌ Wrong — non-default after default
+def example(a, b=10, c):
+    pass
+```
+
+🔻Keyword Arguments:
+
+Instead of relying on position, you can specify which parameter gets which value by **name**.
+
+```python
+def book_ticket(passenger, destination, seat_class):
+    print(f"Passenger: {passenger}")
+    print(f"Destination: {destination}")
+    print(f"Class: {seat_class}")
+
+# Positional (order matters)
+book_ticket("Ali", "Lahore", "Economy")
+
+# Keyword (order doesn't matter)
+book_ticket(destination="Lahore", seat_class="Economy", passenger="Ali")
+book_ticket(seat_class="Business", passenger="Sara", destination="Islamabad")
+```
+
+**When to use:** When a function has many parameters and you want to be explicit about which is which.
+
+🔻Required vs Optional Parameters: 
+```python
+def make_sandwich(bread, filling, sauce=None, drink=None):
+    """
+    bread, filling → REQUIRED (no defaults)
+    sauce, drink → OPTIONAL (have defaults)
+    """
+    print(f"Sandwich made with {bread} and {filling}")
+    if sauce:
+        print(f"  Sauce: {sauce}")
+    if drink:
+        print(f"  Drink: {drink}")
+
+# Minimum required arguments
+make_sandwich("White Bread", "Chicken")
+
+# With optional arguments
+make_sandwich("Brown Bread", "Egg", sauce="Mayo")
+make_sandwich("Whole Wheat", "Veggies", sauce="Ketchup", drink="Juice")
+```
+
 ---
 
-## 🔶 Return Values
+## 🔶 Return Values:
 
 A function can **send a value back** to wherever it was called using `return`.
 
@@ -128,7 +202,9 @@ print(result)   # None  ← function returned nothing
 
 ---
 
-### `return` vs `print` — critical difference
+### `return` vs `print` :
+1. return: Gives a value back to the function’s caller and stops the function.
+2. print: Shows text or results on the console while the function keeps running.
 
 ```python
 # Using print
@@ -150,9 +226,8 @@ y = calculate_with_return(10, 5)   # y = 15 (you can use this value)
 
 # But you can use y
 z = y * 2   # z = 30 ✅
-```
-
 > 💡 **Rule:** Use `print` to **show** something. Use `return` to **give back** something.
+```
 
 ---
 
@@ -170,7 +245,6 @@ print(user_name)   # Ayesha
 print(user_age)    # 21
 print(user_city)   # Karachi
 ```
-
 ---
 
 ### Early return — exit the function before the end:
@@ -188,28 +262,21 @@ print(check_eligibility(25))   # Eligible
 
 ---
 
-## 🔶 Functions Without Return (Return `None`)
+## 🔶 Functions Without Return :
 
 If a function doesn't have a `return` statement, Python automatically returns `None`.
 
 ```python
-def greet(name):
-    print(f"Hello, {name}!")
-    # no return
+def without_return():
+    x = 5 + 3
 
-result = greet("Ali")
-print(result)   # None
-```
+def explicit_none():
+    return None
 
-**When is this useful?** When the function's job is to **do something** (like print, save to a file, send an email) rather than **calculate something**.
 
-```python
-def save_to_file(data):
-    with open("data.txt", "w") as f:
-        f.write(data)
-    # no return needed — job is done
-
-save_to_file("Important data")   # function does its job, returns None
+# Both functions return None
+# func1 = no_return()      # None
+# func2 = explicit_none()  # None
 ```
 
 ---
@@ -243,263 +310,3 @@ print(calculate_bmi.__doc__)
 
 ---
 
-## 🔶 Default Parameter Values
-
-You can give parameters default values. If the caller doesn't provide an argument, the default is used.
-
-```python
-def greet(name, greeting="Hello"):
-    print(f"{greeting}, {name}!")
-
-greet("Ali")                    # Hello, Ali!  (uses default)
-greet("Sara", "Assalam o Alaikum")  # Assalam o Alaikum, Sara!  (overrides default)
-```
-
-### Rules for default parameters:
-1. Default parameters must come **after** non-default parameters
-2. Once you use a default, all parameters after it must also have defaults
-
-```python
-# ✅ Correct
-def example(a, b, c=10, d=20):
-    pass
-
-# ❌ Wrong — non-default after default
-def example(a, b=10, c):
-    pass
-```
-
----
-
-## 🔶 Keyword Arguments
-
-Instead of relying on position, you can specify which parameter gets which value by **name**.
-
-```python
-def book_ticket(passenger, destination, seat_class):
-    print(f"Passenger: {passenger}")
-    print(f"Destination: {destination}")
-    print(f"Class: {seat_class}")
-
-# Positional (order matters)
-book_ticket("Ali", "Lahore", "Economy")
-
-# Keyword (order doesn't matter)
-book_ticket(destination="Lahore", seat_class="Economy", passenger="Ali")
-book_ticket(seat_class="Business", passenger="Sara", destination="Islamabad")
-```
-
-**When to use:** When a function has many parameters and you want to be explicit about which is which.
-
----
-
-## 🔶 Real World Examples
-
-### Example 1 — Calculate Electricity Bill
-```python
-def calculate_bill(units):
-    """
-    Calculate electricity bill based on units consumed.
-    First 100 units: Rs.5 per unit
-    Next 100 units: Rs.7 per unit
-    Above 200 units: Rs.10 per unit
-    """
-    if units <= 100:
-        return units * 5
-    elif units <= 200:
-        return (100 * 5) + ((units - 100) * 7)
-    else:
-        return (100 * 5) + (100 * 7) + ((units - 200) * 10)
-
-print(f"Bill for 50 units  : Rs.{calculate_bill(50)}")    # Rs.250
-print(f"Bill for 150 units : Rs.{calculate_bill(150)}")   # Rs.850
-print(f"Bill for 250 units : Rs.{calculate_bill(250)}")   # Rs.1700
-```
-
----
-
-### Example 2 — Format Phone Number
-```python
-def format_phone(number):
-    """
-    Format a 10-digit phone number as (0300) 123-4567
-    """
-    if len(number) != 10:
-        return "Invalid number"
-    
-    return f"({number[:4]}) {number[4:7]}-{number[7:]}"
-
-print(format_phone("0301234567"))   # (0301) 234-567
-print(format_phone("0321987654"))   # (0321) 987-654
-print(format_phone("12345"))        # Invalid number
-```
-
----
-
-### Example 3 — Grade Calculator
-```python
-def calculate_grade(marks):
-    """
-    Calculate grade based on marks.
-    90+  → A
-    80-89 → B
-    70-79 → C
-    60-69 → D
-    <60  → F
-    """
-    if marks >= 90:
-        return "A"
-    elif marks >= 80:
-        return "B"
-    elif marks >= 70:
-        return "C"
-    elif marks >= 60:
-        return "D"
-    else:
-        return "F"
-
-students = [
-    ("Ali", 95),
-    ("Sara", 78),
-    ("Bilal", 82),
-    ("Hina", 55),
-]
-
-print("=== Grade Report ===")
-for name, marks in students:
-    grade = calculate_grade(marks)
-    print(f"  {name:<8} {marks:>3}   Grade: {grade}")
-
-# Output:
-# === Grade Report ===
-#   Ali       95   Grade: A
-#   Sara      78   Grade: C
-#   Bilal     82   Grade: B
-#   Hina      55   Grade: F
-```
-
----
-
-### Example 4 — Validate Email
-```python
-def is_valid_email(email):
-    """
-    Basic email validation:
-    - Must contain exactly one @
-    - Must have text before and after @
-    - Must have a dot after @
-    """
-    if email.count("@") != 1:
-        return False
-    
-    parts = email.split("@")
-    username, domain = parts[0], parts[1]
-    
-    if not username or not domain:
-        return False
-    
-    if "." not in domain:
-        return False
-    
-    return True
-
-emails = [
-    "ali@gmail.com",
-    "invalid-email",
-    "sara@@yahoo.com",
-    "bilal@company",
-    "hina@outlook.co.uk",
-]
-
-for email in emails:
-    status = "✅ Valid" if is_valid_email(email) else "❌ Invalid"
-    print(f"  {email:<25} {status}")
-
-# Output:
-#   ali@gmail.com             ✅ Valid
-#   invalid-email             ❌ Invalid
-#   sara@@yahoo.com           ❌ Invalid
-#   bilal@company             ❌ Invalid
-#   hina@outlook.co.uk        ✅ Valid
-```
-
----
-
-## 🔶 Common Mistakes
-
-### ❌ Mistake 1 — Forgetting to call the function:
-```python
-def say_hello():
-    print("Hello!")
-
-say_hello    # ❌ just a reference, doesn't run
-say_hello()  # ✅ actually calls the function
-```
-
-### ❌ Mistake 2 — Using `print` when you need `return`:
-```python
-def double(x):
-    print(x * 2)   # ❌ prints but doesn't return
-
-result = double(5)
-# result is None, not 10!
-
-def double_correct(x):
-    return x * 2   # ✅
-
-result = double_correct(5)
-# result is 10 ✅
-```
-
-### ❌ Mistake 3 — Trying to use a value after `return`:
-```python
-def example():
-    return 42
-    print("This will never run")   # ❌ unreachable code
-```
-
-### ❌ Mistake 4 — Wrong parameter order:
-```python
-def divide(a, b):
-    return a / b
-
-result = divide(10, 2)   # 5.0 ✅
-result = divide(2, 10)   # 0.2  ← different result, maybe not what you wanted
-```
-
----
-
-## 🔶 Quick Reference
-
-```
-Defining:
-  def function_name(param1, param2):
-      # code block
-      return value
-
-Calling:
-  function_name(arg1, arg2)
-
-Parameters:
-  - Positional: order matters
-  - Keyword: name specified, order doesn't matter
-  - Default: optional, have fallback values
-
-Return:
-  - return value     → gives back a value
-  - no return        → returns None
-  - return a, b, c   → returns tuple
-
-Docstring:
-  """Explain what function does"""
-
-Key Points:
-  - Functions must be defined before calling
-  - Indentation defines function body
-  - return exits function immediately
-  - Use snake_case for function names
-```
-
----
-
-Ready to move on to **02_parameters_arguments.mdx** next?
