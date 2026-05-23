@@ -226,6 +226,35 @@ def bad(a, **kwargs, *args):   # SyntaxError
 def good(a, *args, **kwargs):
     pass
 ```
+---
+## 🔶 Unpacking — The Reverse Operation:
+
+`*` and `**` also work in **function calls** to unpack collections.
+
+### Unpacking a list/tuple with `*`:
+```python
+def add(a, b, c):
+    return a + b + c
+
+numbers = [10, 20, 30]
+result = add(*numbers)   # unpacks to add(10, 20, 30)
+print(result)   # 60
+```
+
+### Unpacking a dictionary with `**`:
+```python
+def register(username, email, age):
+    print(f"User: {username}, Email: {email}, Age: {age}")
+
+user_data = {
+    "username": "ali123",
+    "email": "ali@gmail.com",
+    "age": 25
+}
+
+register(**user_data)   # unpacks to register(username="ali123", email=..., age=25)
+# Output: User: ali123, Email: ali@gmail.com, Age: 25
+```
 
 ---
 
