@@ -1,0 +1,284 @@
+# 📚 Call Stack in Python
+
+---
+
+## 🔶 What is the Call Stack?
+
+The call stack keeps track of active function calls. Each time a function is called, Python creates a stack frame with its local variables and return address, pushes it onto the stack, and pops it off when the function finishes.
+
+> A Last-In, First-Out (LIFO) stack that manages function execution.
+
+
+def say_goodbye():
+    print("Goodbye!")
+
+def say_hello():
+    print("Hello!")
+    say_goodbye()
+    print("See you later!")
+
+say_hello()
+```
+
+When this runs, Python's internal to-do list looks like:
+
+```
+Start:     []
+
+After say_hello():     [say_hello]
+
+After say_goodbye():   [say_hello, say_goodbye]
+
+After say_goodbye() finishes:  [say_hello]
+
+After say_hello() finishes:    []
+```
+
+---
+
+## 🔶 How It Actually Works
+
+The call stack operates on **LIFO** (Last In, First Out). The most recent function call sits on top. The moment it finishes, it disappears.
+
+Think of it like a stack of plates:
+
+```
+You add plates one by one:    You remove them one by one:
+
+Plate 3 (top)                 (Remove Plate 3 first)
+Plate 2                       Then Plate 2
+Plate 1 (bottom)              Then Plate 1
+```
+
+---
+
+## 🔶 Real World Analogy — Homework Procrastination
+
+You're about to do homework:
+
+```
+Task: Complete Math assignment
+↓ But first, I need a pencil
+  Task: Find pencil
+  ↓ But first, I need to go to the shop
+    Task: Go to shop
+    ↓ But first, I need shoes
+      Task: Put on shoes  ← DOING THIS NOW
+    ← Shoes on → return to shop
+  ← Shop completed → return to pencil search
+← Pencil found → return to homework
+Math assignment starts...
+```
+
+Your brain remembers this **nested** list of tasks. Python's call stack does the same.
+
+---
+
+## 🔶 Example — Step by Step
+
+```python
+def level_3():
+    print("  Level 3 is running")
+    return 333
+
+def level_2():
+    print("  Level 2 is running")
+    result = level_3()
+    print(f"  Level 3 returned: {result}")
+    return 222
+
+def level_1():
+    print("Level 1 is running")
+    result = level_2()
+    print(f"Level 2 returned: {result}")
+    return 111
+
+print("Starting...")
+level_1()
+print("Done!")
+```
+
+**Execution flow with the call stack:**
+
+```
+Step 1: print("Starting...")
+Stack: [main]
+Output: Starting...
+
+Step 2: level_1() is called
+Stack: [main, level_1]
+
+Step 3: Inside level_1(), print message
+Output: Level 1 is running
+
+Step 4: level_1() calls level_2()
+Stack: [main, level_1, level_2]
+
+Step 5: Inside level_2(), print message
+Output:   Level 2 is running
+
+Step 6: level_2() calls level_3()
+Stack: [main, level_1, level_2, level_3]
+
+Step 7: Inside level_3(), print message
+Output:     Level 3 is running
+
+Step 8: level_3() returns 333
+Stack: [main, level_1, level_2]   ← level_3 removed
+
+Step 9: level_2() prints the returned value
+Output:   Level 3 returned: 333
+
+Step 10: level_2() returns 222
+Stack: [main, level_1]   ← level_2 removed
+
+Step 11: level_1() prints the returned value
+Output: Level 2 returned: 222
+
+Step 12: level_1() returns 111
+Stack: [main]   ← level_1 removed
+
+Step 13: print("Done!")
+Output: Done!
+```
+
+---
+
+## 🔶 Visualizing the Stack in Action
+
+Here's a function that shows what's on the stack at each moment:
+
+```python
+import inspect
+
+def show_stack():
+    """Show all functions currently on the call stack"""
+    stack = inspect.stack()
+    print("📚 Current Call Stack:")
+    for i, frame in enumerate(stack):
+        indent = "  " * i
+        print(f"{indent}→ {frame.function}()")
+
+def function_c():
+    show_stack()
+
+def function_b():
+    function_c()
+
+def function_a():
+    function_b()
+
+function_a()
+```
+
+**Output:**
+```
+📚 Current Call Stack:
+→ show_stack()
+  → function_c()
+    → function_b()
+      → function_a()
+        → <module>()
+```
+
+The deepest function is at the bottom. The current function is at the top.
+
+---
+
+## 🔶 Understanding Error Messages — Stack Traces
+
+When code crashes, Python shows you the **call stack at the moment of crash**. This tells you exactly which functions were running.
+
+```python
+def divide(a, b):
+    return a / b
+
+def calculate():
+    result = divide(10, 0)   # ← ERROR HAPPENS HERE
+    return result
+
+def process():
+    return calculate()
+
+process()
+```
+
+**Error output:**
+```
+Traceback (most recent call last):
+  File "script.py", line 8, in <module>
+    process()
+  File "script.py", line 6, in process
+    return calculate()
+  File "script.py", line 3, in calculate
+    result = divide(10, 0)
+  File "script.py", line 1, in divide
+    return a / b
+ZeroDivisionError: division by zero
+```
+
+**Read from bottom to top:**
+- `divide()` tries to divide by 0 — crash happens here
+- `divide()` was called from `calculate()` 
+- `calculate()` was called from `process()`
+- `process()` was called from the main script
+
+This is the **call stack at the moment of the crash**.
+
+---
+
+## 🔶 Stack Overflow — Too Many Nested Calls
+
+If you call too many functions nested, the stack gets too full and Python stops you:
+
+```python
+def infinite_recursion(n):
+    print(n)
+    infinite_recursion(n + 1)   # ← calls itself forever
+
+infinite_recursion(1)
+```
+
+**What happens:**
+```
+Call stack grows:
+[main, infinite_recursion(1)]
+[main, infinite_recursion(1), infinite_recursion(2)]
+[main, infinite_recursion(1), infinite_recursion(2), infinite_recursion(3)]
+... keeps growing ...
+[main, infinite_recursion(1), ... infinite_recursion(1000)]
+
+Eventually:
+RecursionError: maximum recursion depth exceeded
+```
+
+Python protects you by limiting stack depth to ~1000 calls.
+
+---
+
+
+## 🔶 Key Takeaways
+
+### The Call Stack:
+- **Tracks** which functions are running
+- **Remembers** where to return when a function finishes
+- **Works LIFO** — Last In, First Out
+- **Grows** when you call a function
+- **Shrinks** when a function returns
+
+### Error Messages:
+- Show the **call stack at the moment of crash**
+- Read from **bottom to top**
+- Tell you **exactly** which functions led to the error
+
+### Stack Overflow:
+- Happens when too many functions are nested
+- Python limits depth to ~1000 to prevent memory issues
+- Common with infinite recursion
+
+### Best Practices:
+- Keep function nesting reasonable
+- Avoid infinite recursion with proper base cases
+
+---
+
