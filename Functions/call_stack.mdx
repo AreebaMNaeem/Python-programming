@@ -79,48 +79,49 @@ print("Done!")
 **Execution flow with the call stack:**
 
 ```
-**Step 1:** print("Starting...")
+Step 1: print("Starting...")
 Stack: [main]
 Output: Starting...
 
-**Step 2:** level_1() is called
+Step 2: level_1() is called
 Stack: [main, level_1]
 
-**Step 3:** Inside level_1(), print message
+Step 3: Inside level_1(), print message
 Output: Level 1 is running
 
-**Step 4:** level_1() calls level_2()
+Step 4: level_1() calls level_2()
 Stack: [main, level_1, level_2]
 
-**Step 5:** Inside level_2(), print message
+Step 5: Inside level_2(), print message
 Output:   Level 2 is running
 
-**Step 6:** level_2() calls level_3()
+Step 6: level_2() calls level_3()
 Stack: [main, level_1, level_2, level_3]
 
-**Step 7:** Inside level_3(), print message
+Step 7: Inside level_3(), print message
 Output:     Level 3 is running
 
-**Step 8:** level_3() returns 333
+Step 8: level_3() returns 333
 Stack: [main, level_1, level_2]   ← level_3 removed
 
-**Step 9:** level_2() prints the returned value
+Step 9: level_2() prints the returned value
 Output:   Level 3 returned: 333
 
-**Step 10:** level_2() returns 222
+Step 10: level_2() returns 222
 Stack: [main, level_1]   ← level_2 removed
 
-**Step 11:** level_1() prints the returned value
+Step 11: level_1() prints the returned value
 Output: Level 2 returned: 222
 
-**Step 12:** level_1() returns 111
+Step 12: level_1() returns 111
 Stack: [main]   ← level_1 removed
 
-**Step 13:** print("Done!")
+Step 13: print("Done!")
 Output: Done!
 ```
 
 ---
+
 ## 🔶 Understanding Error Messages — Stack Traces:
 
 When code crashes, Python shows you the **call stack at the moment of crash**. This tells you exactly which functions were running.
@@ -191,7 +192,6 @@ RecursionError: maximum recursion depth exceeded
 Python protects you by limiting stack depth to ~1000 calls.
 
 ---
-
 
 ## 🔶 Key Takeaways:
 
