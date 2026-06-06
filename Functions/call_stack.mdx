@@ -8,7 +8,7 @@ The call stack keeps track of active function calls. Each time a function is cal
 
 > A Last-In, First-Out (LIFO) stack that manages function execution.
 
-
+```python
 def say_goodbye():
     print("Goodbye!")
 
@@ -36,7 +36,7 @@ After say_hello() finishes:    []
 
 ---
 
-## 🔶 How It Actually Works
+## 🔶 How It Actually Works:
 
 The call stack operates on **LIFO** (Last In, First Out). The most recent function call sits on top. The moment it finishes, it disappears.
 
@@ -52,29 +52,7 @@ Plate 1 (bottom)              Then Plate 1
 
 ---
 
-## 🔶 Real World Analogy — Homework Procrastination
-
-You're about to do homework:
-
-```
-Task: Complete Math assignment
-↓ But first, I need a pencil
-  Task: Find pencil
-  ↓ But first, I need to go to the shop
-    Task: Go to shop
-    ↓ But first, I need shoes
-      Task: Put on shoes  ← DOING THIS NOW
-    ← Shoes on → return to shop
-  ← Shop completed → return to pencil search
-← Pencil found → return to homework
-Math assignment starts...
-```
-
-Your brain remembers this **nested** list of tasks. Python's call stack does the same.
-
----
-
-## 🔶 Example — Step by Step
+## 🔶 Example — Step by Step: 
 
 ```python
 def level_3():
@@ -101,91 +79,49 @@ print("Done!")
 **Execution flow with the call stack:**
 
 ```
-Step 1: print("Starting...")
+**Step 1:** print("Starting...")
 Stack: [main]
 Output: Starting...
 
-Step 2: level_1() is called
+**Step 2:** level_1() is called
 Stack: [main, level_1]
 
-Step 3: Inside level_1(), print message
+**Step 3:** Inside level_1(), print message
 Output: Level 1 is running
 
-Step 4: level_1() calls level_2()
+**Step 4:** level_1() calls level_2()
 Stack: [main, level_1, level_2]
 
-Step 5: Inside level_2(), print message
+**Step 5:** Inside level_2(), print message
 Output:   Level 2 is running
 
-Step 6: level_2() calls level_3()
+**Step 6:** level_2() calls level_3()
 Stack: [main, level_1, level_2, level_3]
 
-Step 7: Inside level_3(), print message
+**Step 7:** Inside level_3(), print message
 Output:     Level 3 is running
 
-Step 8: level_3() returns 333
+**Step 8:** level_3() returns 333
 Stack: [main, level_1, level_2]   ← level_3 removed
 
-Step 9: level_2() prints the returned value
+**Step 9:** level_2() prints the returned value
 Output:   Level 3 returned: 333
 
-Step 10: level_2() returns 222
+**Step 10:** level_2() returns 222
 Stack: [main, level_1]   ← level_2 removed
 
-Step 11: level_1() prints the returned value
+**Step 11:** level_1() prints the returned value
 Output: Level 2 returned: 222
 
-Step 12: level_1() returns 111
+**Step 12:** level_1() returns 111
 Stack: [main]   ← level_1 removed
 
-Step 13: print("Done!")
+**Step 13:** print("Done!")
 Output: Done!
 ```
 
 ---
-
-## 🔶 Visualizing the Stack in Action
-
-Here's a function that shows what's on the stack at each moment:
-
-```python
-import inspect
-
-def show_stack():
-    """Show all functions currently on the call stack"""
-    stack = inspect.stack()
-    print("📚 Current Call Stack:")
-    for i, frame in enumerate(stack):
-        indent = "  " * i
-        print(f"{indent}→ {frame.function}()")
-
-def function_c():
-    show_stack()
-
-def function_b():
-    function_c()
-
-def function_a():
-    function_b()
-
-function_a()
-```
-
-**Output:**
-```
-📚 Current Call Stack:
-→ show_stack()
-  → function_c()
-    → function_b()
-      → function_a()
-        → <module>()
-```
-
-The deepest function is at the bottom. The current function is at the top.
-
----
-
-## 🔶 Understanding Error Messages — Stack Traces
+## 🔶 Understanding Error Messages — Stack Traces:
 
 When code crashes, Python shows you the **call stack at the moment of crash**. This tells you exactly which functions were running.
 
@@ -227,7 +163,7 @@ This is the **call stack at the moment of the crash**.
 
 ---
 
-## 🔶 Stack Overflow — Too Many Nested Calls
+## 🔶 Stack Overflow — Too Many Nested Calls:
 
 If you call too many functions nested, the stack gets too full and Python stops you:
 
@@ -257,7 +193,7 @@ Python protects you by limiting stack depth to ~1000 calls.
 ---
 
 
-## 🔶 Key Takeaways
+## 🔶 Key Takeaways:
 
 ### The Call Stack:
 - **Tracks** which functions are running
