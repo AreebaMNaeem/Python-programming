@@ -26,7 +26,7 @@ print(squares)   # [1, 4, 9, 16, 25]
 
 ---
 
-## 🔶 Basic Syntax:
+## 🔶 Basic Syntax : 
 
 ```
 new_list = [expression for item in iterable]
