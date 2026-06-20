@@ -43,7 +43,7 @@ Both work. But OOP is **more organized** and **easier to expand** when you have 
 
 A **class** is like a **blueprint or template** used to create objects. It defines the structure — what data **(attributes)** each thing should have and what actions **(methods)** it can perform.
 
-### Analogy: Building a House
+### ➡️ Analogy: Building a House
 
 Before you build an actual house, you need:
 - A blueprint that shows the layout
@@ -109,20 +109,20 @@ class ClassName:
         pass
 ```
 
-Breaking it down:
+### ➡️ Breaking it down:
 
-| `class ClassName` : Define a class named ClassName 
-| `__init__(self, parameters)` : Special method that runs automatically when creating an object |
-| `self.attribute` : Create an attribute (data) for this object |
-| `def method(self)` : Create a method (function) that the object can perform |
+| `class ClassName` : Define a class named ClassName   
+| `__init__(self, parameters)` : Special method that runs automatically when creating an object 
+| `self.attribute` : Create an attribute (data) for this object 
+| `def method(self)` : Create a method (function) that the object can perform 
 
 ---
 
-## 🔶 Understanding `self`
+## 🔶 Understanding `self`:
 
 `self` is a special variable that means **"this specific object"** or **"this particular instance"**.
 
-### Analogy: Restaurant Order Slip
+### ➡️ Analogy: Restaurant Order Slip
 
 Imagine you're at a restaurant. Each order slip has:
 - Customer name
@@ -165,7 +165,7 @@ When you call `order1.prepare()`, Python knows to use `order1`'s data. Inside th
 
 It's like the **startup process** — it initializes everything the object needs to begin working.
 
-### Analogy: Filling Out a New SIM Card Form
+### ➡️ Analogy: Filling Out a New SIM Card Form
 
 When you get a new SIM card from a mobile shop:
 
@@ -246,42 +246,3 @@ Toyota refueled to 100%
 ```
 
 ---
-
-## 🔶 Creating Your First Class
-
-### Real Example — Bank Account:
-
-```python
-class BankAccount:
-    def __init__(self, account_holder, balance):
-        self.account_holder = account_holder
-        self.balance = balance
-    
-    def deposit(self, amount):
-        self.balance += amount
-        print(f"Deposited Rs.{amount}. Balance: Rs.{self.balance}")
-    
-    def withdraw(self, amount):
-        if amount <= self.balance:
-            self.balance -= amount
-            print(f"Withdrew Rs.{amount}. Balance: Rs.{self.balance}")
-        else:
-            print("Insufficient funds!")
-
-account1 = BankAccount("Ali", 10000)
-account2 = BankAccount("Sara", 5000)
-
-account1.deposit(2000)
-account2.withdraw(1000)
-account1.withdraw(20000)
-```
-
-**Output:**
-```
-Deposited Rs.2000. Balance: Rs.12000
-Withdrew Rs.1000. Balance: Rs.4000
-Insufficient funds!
-```
-
----
-
