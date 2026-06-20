@@ -168,14 +168,6 @@ else:
     print(f"You are {age} years old")
 ```
 
-**Test cases:**
-```
-Input: 25
-Output: You are 25 years old
-
-Input: abc
-Output: Please enter a number!
-```
 
 ---
 
@@ -250,18 +242,6 @@ try:
     print(check_password(pwd))
 except ValueError as e:
     print(f"Error: {e}")
-```
-
-**Test cases:**
-```
-Input: abc
-Output: Error: Password must be 6+ characters!
-
-Input: abcdef
-Output: Error: Password must contain a number!
-
-Input: pass123
-Output: Password is strong!
 ```
 
 ---
