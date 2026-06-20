@@ -111,10 +111,12 @@ class ClassName:
 
 ### ➡️ Breaking it down:
 
-| `class ClassName` : Define a class named ClassName   
-| `__init__(self, parameters)` : Special method that runs automatically when creating an object 
-| `self.attribute` : Create an attribute (data) for this object 
-| `def method(self)` : Create a method (function) that the object can perform 
+- `class ClassName` : Define a class named ClassName   
+- `__init__(self, parameters)` : Special method that runs automatically when creating an object  
+- `self.attribute` : Create an attribute (data) for this object   
+- `def method(self)` : Create a method (function) that the object can perform 
+
+
 
 ---
 
