@@ -183,11 +183,8 @@ class BankAccount:
         self.balance = balance
 
 account = BankAccount(5000)
-
 print(account.balance)   # ✅ Valid balance
-
 account.balance = -2000  # ❌ Invalid balance
-
 print(account.balance)   # -2000
 
 ⚠️ Problem: The balance became `-2000`, which may not be allowed in a bank account. There is no validation to prevent incorrect values.
