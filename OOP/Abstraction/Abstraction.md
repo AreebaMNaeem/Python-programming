@@ -1,4 +1,4 @@
-# 🎭 Abstraction in Python
+# 🧩 Abstraction in Python
 
 ---
 
@@ -258,7 +258,6 @@ Beyond regular methods, `@abstractmethod` can also enforce **properties** and **
 
 > ⚠️ Always place `@property` or `@staticmethod` **above** `@abstractmethod`.
 
----
 
 ```python
 from abc import ABC, abstractmethod
