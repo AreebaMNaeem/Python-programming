@@ -36,7 +36,7 @@ Think of it as a **contract** — subclasses must follow certain rules, but HOW 
 ---
 
 
-## 🔶 Abstraction in Python: Abstract Base Classes
+## 🔶 Abstraction in Python: Abstract Base Classes:
 
 Use the `abc` module to create abstract classes:
 
@@ -162,7 +162,7 @@ apply_for_service(IslamicBank(), "Sara", 200000)
 
 ---
 
-## 🔶 Abstraction vs Encapsulation
+## 🔶 Abstraction vs Encapsulation:
 
 Easy to confuse! Here's the difference:
 
@@ -250,7 +250,54 @@ Average: 91.7
 
 ---
 
-## 🔶 Key Rules to Remember
+## 🔶 Abstract Properties & Abstract Static Methods :
+
+Beyond regular methods, `@abstractmethod` can also enforce **properties** and **static methods** on subclasses.
+- `@property` for values accessed like variables
+- `@staticmethod` for class-level methods that need no object.
+
+> ⚠️ Always place `@property` or `@staticmethod` **above** `@abstractmethod`.
+
+---
+
+```python
+from abc import ABC, abstractmethod
+
+class Phone(ABC):
+
+    @property
+    @abstractmethod
+    def battery_life(self):
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def charging_type():
+        pass
+
+
+class Android(Phone):
+    @property
+    def battery_life(self):
+        return "4500 mAh"
+
+    @staticmethod
+    def charging_type():
+        print("⚡ Android uses USB-C charging")
+
+
+a = Android()
+print(a.battery_life)     # 4500 mAh
+Android.charging_type()   # ⚡ Android uses USB-C charging
+```
+
+👉 `battery_life` is accessed like a variable — no `()` needed. `charging_type()` is called on the class directly — no object needed.
+
+
+---
+
+
+## 🔶 Key Rules to Remember:
 
 ✅ **DO:**
 - Define abstract methods that subclasses MUST implement
