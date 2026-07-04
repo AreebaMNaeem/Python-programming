@@ -140,10 +140,11 @@ Combined: 175 marks
 
 ## 💡 Why Use Polymorphism?
 
-✅ **Flexibility** — Code works with multiple types
-✅ **Reusability** — Write once, use with many objects
-✅ **Scalability** — Add new types without changing existing code
+✅ **Flexibility** — Code works with multiple types  
+✅ **Reusability** — Write once, use with many objects  
+✅ **Scalability** — Add new types without changing existing code  
 ✅ **Maintainability** — Cleaner, more organized code
+
 
 ---
 
