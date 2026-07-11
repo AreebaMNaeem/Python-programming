@@ -1,0 +1,237 @@
+# 🔄 Higher-Order Functions
+
+---
+
+## 🎯 What is a Higher-Order Function?
+
+A **higher-order function** is a function that:
+- **Takes other functions as arguments**, OR
+- **Returns a function as output**, OR
+- **Does both**
+
+It treats functions as "first-class citizens" — functions are like data that can be passed around!
+
+```python
+# A function that takes another function
+def apply_to_list(items, func):
+    return [func(item) for item in items]
+
+# A function that returns another function
+def create_calculator(operation):
+    if operation == "add":
+        return lambda x, y: x + y
+    elif operation == "multiply":
+        return lambda x, y: x * y
+```
+
+---
+
+## 💡 Real-World Analogy: Manufacturing Workshop
+
+**Normal Function:** One worker doing one job
+- Input: Raw material
+- Output: Finished product
+
+**Higher-Order Function:** A supervisor who can:
+- Tell different workers (functions) what to do
+- Give each worker a specific task
+- Collect results from multiple workers
+
+```
+Supervisor (Higher-Order Function)
+├── Tells Worker A (function1) to process data
+├── Tells Worker B (function2) to filter data
+└── Returns combined results
+```
+
+---
+
+## 📝 Basic Example: Processing Student Grades
+
+```python
+def process_grades(grades, transformation):
+    """Takes a function as argument"""
+    return [transformation(grade) for grade in grades]
+
+# Different transformations
+marks = [45, 78, 92, 65, 88]
+
+# Add curve (add 5 points)
+curved = process_grades(marks, lambda x: x + 5)
+print(curved)  # [50, 83, 97, 70, 93]
+
+# Convert to percentage
+percentage = process_grades(marks, lambda x: f"{x}%")
+print(percentage)  # ['45%', '78%', '92%', '65%', '88%']
+
+# Check if passing (>= 50)
+passing = process_grades(marks, lambda x: x >= 50)
+print(passing)  # [False, True, True, True, True]
+```
+
+---
+
+## 🏭 Function That Returns Functions
+
+```python
+def create_discount_calculator(discount_percent):
+    """Returns a function based on discount"""
+    def apply_discount(price):
+        return price * (1 - discount_percent / 100)
+    return apply_discount
+
+# Create different discount calculators
+student_discount = create_discount_calculator(20)  # 20% off
+senior_discount = create_discount_calculator(30)   # 30% off
+
+# Use them
+book_price = 500
+print(f"Student pays: Rs.{student_discount(book_price)}")  # Rs.400
+print(f"Senior pays: Rs.{senior_discount(book_price)}")    # Rs.350
+```
+
+---
+
+## 🗺️ map() - Transform Each Element
+
+`map()` applies a function to **every element** in a sequence.
+
+**Analogy:** Assembly line where each product gets processed identically
+
+```python
+# Example 1: Double all numbers
+numbers = [2, 4, 6, 8, 10]
+doubled = list(map(lambda x: x * 2, numbers))
+print(doubled)  # [4, 8, 12, 16, 20]
+
+# Example 2: Convert Celsius to Fahrenheit
+temps_celsius = [0, 10, 20, 30, 40]
+to_fahrenheit = lambda c: (c * 9/5) + 32
+temps_fahrenheit = list(map(to_fahrenheit, temps_celsius))
+print(temps_fahrenheit)  # [32.0, 50.0, 68.0, 86.0, 104.0]
+
+# Example 3: Extract student names (uppercase)
+students = ["ali", "sara", "bilal", "hina"]
+uppercase_names = list(map(str.upper, students))
+print(uppercase_names)  # ['ALI', 'SARA', 'BILAL', 'HINA']
+```
+
+**Key:** Every element gets transformed. Input count = Output count.
+
+---
+
+## 🔍 filter() - Select Elements
+
+`filter()` keeps **only elements that meet a condition**.
+
+**Analogy:** Security checkpoint that lets only authorized people through
+
+```python
+# Example 1: Keep only even numbers
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # [2, 4, 6, 8, 10]
+
+# Example 2: Keep only passing students (>= 50)
+student_marks = {
+    "Ali": 65,
+    "Sara": 45,
+    "Bilal": 72,
+    "Hina": 48,
+    "Hassan": 80
+}
+passed = {name: marks for name, marks in student_marks.items() 
+          if marks >= 50}
+print(passed)  # {'Ali': 65, 'Bilal': 72, 'Hassan': 80}
+
+# Example 3: Keep only products with price > 1000
+products = ["Phone: 15000", "Pen: 50", "Laptop: 80000", "Book: 300"]
+expensive = list(filter(lambda p: int(p.split(": ")[1]) > 1000, products))
+print(expensive)  # ['Phone: 15000', 'Laptop: 80000']
+```
+
+**Key:** Some elements filtered out. Output count <= Input count.
+
+---
+
+## 📊 reduce() - Combine Into Single Value
+
+`reduce()` **combines all elements** into a single result.
+
+**Analogy:** Cashier combining all items into a total bill
+
+```python
+from functools import reduce
+
+# Example 1: Sum all numbers
+numbers = [1, 2, 3, 4, 5]
+total = reduce(lambda x, y: x + y, numbers)
+print(total)  # 15
+
+# Example 2: Product of all numbers (factorial)
+numbers = [1, 2, 3, 4, 5]
+product = reduce(lambda x, y: x * y, numbers)
+print(product)  # 120
+
+# Example 3: Combine multiple prices into total bill
+prices = [500, 1200, 300, 450]
+bill_total = reduce(lambda x, y: x + y, prices)
+print(f"Total Bill: Rs.{bill_total}")  # Total Bill: Rs.2450
+
+# Example 4: Find maximum price
+prices = [100, 5000, 250, 3000, 150]
+max_price = reduce(lambda x, y: x if x > y else y, prices)
+print(f"Most expensive: Rs.{max_price}")  # Most expensive: Rs.5000
+```
+
+**Key:** All elements combined into ONE result. Output count = 1.
+
+---
+
+## 🔗 Combining map(), filter(), reduce()
+
+```python
+from functools import reduce
+
+# Sales data
+sales = [500, 1200, 300, 2500, 450, 3000, 800]
+
+# Process: Filter > 500 → Map to add 10% tax → Reduce to total
+result = reduce(
+    lambda x, y: x + y,
+    map(
+        lambda x: x * 1.10,  # Add 10% tax
+        filter(lambda x: x > 500, sales)  # Filter > 500
+    )
+)
+
+print(f"Total after tax: Rs.{result:.2f}")
+# Filters: [1200, 2500, 3000]
+# Maps: [1320, 2750, 3300]
+# Reduces: 7370
+```
+
+**Flow:** Filter → Map → Reduce (inside-out)
+
+---
+
+## ✅ Quick Comparison
+
+| Function | Purpose | Returns |
+|----------|---------|---------|
+| **map()** | Transform each element | List of transformed elements |
+| **filter()** | Keep matching elements | List of selected elements |
+| **reduce()** | Combine into one | Single value |
+
+---
+
+## 🔑 Key Points
+
+✅ Higher-order functions make code **more flexible**
+✅ Pass functions around like regular data
+✅ Enables **functional programming** style
+✅ `map()`, `filter()`, `reduce()` are the most common
+✅ Often used with `lambda` for quick operations
+
+---
+
