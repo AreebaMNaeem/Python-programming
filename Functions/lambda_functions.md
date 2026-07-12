@@ -240,6 +240,66 @@ for product in by_price:
 # Phone: Rs.20000
 # Laptop: Rs.50000
 ```
+---
+## 🆚 Lambda vs List Comprehension:
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+# ❌ Lambda + map
+squares = list(map(lambda x: x**2, numbers))
+
+# ✅ List comprehension (better!)
+squares = [x**2 for x in numbers]
+
+# ❌ Lambda + filter
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+
+# ✅ List comprehension (better!)
+evens = [x for x in numbers if x % 2 == 0]
+```
+
+👉 **Prefer list comprehension — cleaner and easier to read!**
 
 ---
 
+## ⚠️ Limitations of Lambda:
+
+### Can't have multiple expressions
+
+```python
+# ❌ FAILS
+calculate = lambda x: y = x * 2; return y + 10
+
+# ✅ Use def
+def calculate(x):
+    y = x * 2
+    return y + 10
+```
+
+### Can't have complex control flow
+
+```python
+# ❌ Hard to read
+grade = lambda x: "A" if x >= 90 else "B" if x >= 80 else "C" if x >= 70 else "F"
+
+# ✅ Use def for clarity
+def grade(marks):
+    if marks >= 90:
+        return "A"
+    elif marks >= 80:
+        return "B"
+    else:
+        return "F"
+```
+
+---
+
+## ✅ When to Use Lambda?
+
+- Simple one-liner ✅
+- Sorting/filtering inline ✅
+- With map(), filter(), reduce() ✅
+- Complex logic ❌ (use def)
+- Need to debug ❌ (use def)
+---
