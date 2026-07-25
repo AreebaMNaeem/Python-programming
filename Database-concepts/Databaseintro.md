@@ -106,7 +106,7 @@ Columns = Attributes (properties)
 
 ## 🔑 Primary Key & Foreign Key (Critical!)
 
-### Primary Key (PK)
+## 1. Primary Key (PK)
 
 **Uniquely identifies each row.**
 
@@ -124,7 +124,7 @@ CREATE TABLE students (
 );
 ```
 
-### Foreign Key (FK)
+## 2. Foreign Key (FK)
 
 **Connects to another table's primary key.**
 
