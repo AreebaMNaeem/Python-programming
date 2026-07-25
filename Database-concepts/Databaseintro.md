@@ -146,6 +146,15 @@ student_id is a FOREIGN KEY
 It points to Students.id
 Creates a link between tables!
 ```
+```sql
+CREATE TABLE enrollments (
+    id INTEGER PRIMARY KEY,
+    student_id INTEGER,
+    course_id TEXT,
+    FOREIGN KEY (student_id) REFERENCES students(id)  -- This is FK
+);
+```
+
 
 ---
 
