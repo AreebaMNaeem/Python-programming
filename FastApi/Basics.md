@@ -11,7 +11,7 @@ Under the hood it leans on things you've already studied:
 - **Type hints** (`str`, `int`, `bool`) to validate incoming data
 - **Decorators** (`@app.get(...)`) to attach a Python function to a specific URL + method
 
-**A canteen counter analogy:** 
+### **A canteen counter analogy:** 
 - You hand over your order slip → that's the request
 - The counter guy checks it and passes it to the right window → that's FastAPI routing
 - He brings back your food → that's the response
@@ -37,7 +37,7 @@ uvicorn main:app --reload
 ```
 Then open `http://127.0.0.1:8000` in your browser.
 
-### 🔑 What's Actually Going On Here (OOP-wise)
+## 🔑 What's Actually Going On Here (OOP-wise)
 
 ### 🔶 Object Instantiation :
 `app` is just an object made from the `FastAPI` class.
