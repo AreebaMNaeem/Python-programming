@@ -1,5 +1,7 @@
 # 🛍️ FastAPI Complete CRUD App
 
+This is a simple CRUD (Create, Read, Update, Delete) API for an online shop, built with FastAPI. It's meant as a teaching example — showing how a small set of routes, combined with a Pydantic model, can manage a product catalog end to end.
+
 ---
 
 ## 📝 Full CRUD Application (FastAPI)
@@ -20,7 +22,7 @@ class Product(BaseModel):
     in_stock: bool = True
 
 # Step 3: In-memory "database"
-products_db = {}
+shop_inventory = {}
 
 # Step 4: CRUD Routes
 
@@ -32,43 +34,54 @@ def home():
 # CREATE (POST) → Add product
 @app.post("/products/{product_id}")
 def create_product(product_id: int, product: Product):
-    if product_id in products_db:
+    if product_id in shop_inventory:
         return {"error": "Product already exists"}
-    products_db[product_id] = product
+    shop_inventory[product_id] = product
     return {"msg": "Product added", "product": product}
 
 # READ (GET) → Get single product
 @app.get("/products/{product_id}")
 def get_product(product_id: int):
-    if product_id in products_db:
-        return products_db[product_id]
+    if product_id in shop_inventory:
+        return shop_inventory[product_id]
     return {"error": "Product not found"}
 
 # READ ALL (GET) → Get all products
 @app.get("/products")
 def list_products():
-    return products_db
+    return shop_inventory
 
 # UPDATE (PUT) → Update product
 @app.put("/products/{product_id}")
 def update_product(product_id: int, product: Product):
-    if product_id not in products_db:
+    if product_id not in shop_inventory:
         return {"error": "Product not found"}
-    products_db[product_id] = product
+    shop_inventory[product_id] = product
     return {"msg": "Product updated", "product": product}
 
 # DELETE (DELETE) → Remove product
 @app.delete("/products/{product_id}")
 def delete_product(product_id: int):
-    if product_id not in products_db:
+    if product_id not in shop_inventory:
         return {"error": "Product not found"}
-    del products_db[product_id]
+    del shop_inventory[product_id]
     return {"msg": f"Product {product_id} deleted"}
 ```
 
 ---
 
-## ⚡ How to Run
+## 🏗️ Design Concepts Behind This App
+
+| Concept | Where it appears | Why it matters |
+|---|---|---|
+| **Inheritance** | `class Product(BaseModel)` | `BaseModel` gives `Product` type checking, validation, and JSON conversion automatically. |
+| **Encapsulation** | `shop_inventory = {}` | The dictionary is internal state — users never touch it directly, only through the API routes. |
+| **Polymorphism** | `@app.get`, `@app.post`, `@app.put`, `@app.delete` on `/products/{product_id}` | The same URL path behaves differently depending on the HTTP verb used. |
+| **Abstraction** | `@app.get("/products")` → `return shop_inventory` | The client doesn't need to know *how* products are stored — dict, file, or real database — it just calls the route. |
+
+---
+
+## 🚀 Getting the Server Running
 
 ```bash
 uvicorn main:app --reload
@@ -86,7 +99,7 @@ INFO:     Application startup complete
 
 ---
 
-## 📦 Example Workflows
+## 🧪 Trying Out the Routes
 
 ### ✅ 1. CREATE (POST)
 
@@ -216,59 +229,6 @@ INFO:     Application startup complete
 
 ---
 
-## 🔑 OOP Concepts Inside
-
-### 1️⃣ Inheritance
-```python
-class Product(BaseModel):  # Inherits from BaseModel
-    # Validation, serialization comes from BaseModel
-    name: str
-    price: float
-```
-
-**Why:** `BaseModel` provides type checking, validation, JSON conversion automatically.
-
----
-
-### 2️⃣ Encapsulation
-```python
-products_db = {}  # Internal state (hidden from users)
-```
-
-**Why:** Users don't access database directly. They use API routes which control access.
-
----
-
-### 3️⃣ Polymorphism
-```python
-@app.get("/products/{product_id}")   # Same URL path
-def get_product(product_id: int):
-    ...
-
-@app.post("/products/{product_id}")  # Same URL path
-def create_product(product_id: int, product: Product):
-    ...
-
-@app.put("/products/{product_id}")   # Same URL path
-def update_product(product_id: int, product: Product):
-    ...
-```
-
-**Why:** Same path behaves differently based on HTTP verb (GET, POST, PUT, DELETE).
-
----
-
-### 4️⃣ Abstraction
-```python
-@app.get("/products")
-def list_products():
-    return products_db
-```
-
-**Why:** Client doesn't care HOW we store products (dict, database, file). They just call the route and get data.
-
----
-
 ## 🧠 Understanding the Flow
 
 ```
@@ -299,49 +259,6 @@ def list_products():
 
 ---
 
-## 💾 Testing with cURL
-
-### Create
-```bash
-curl -X POST "http://localhost:8000/products/1" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Laptop",
-    "description": "Gaming laptop",
-    "price": 80000,
-    "quantity": 5
-  }'
-```
-
-### Read All
-```bash
-curl "http://localhost:8000/products"
-```
-
-### Read One
-```bash
-curl "http://localhost:8000/products/1"
-```
-
-### Update
-```bash
-curl -X PUT "http://localhost:8000/products/1" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Gaming Laptop Pro",
-    "description": "RTX 4090",
-    "price": 120000,
-    "quantity": 3
-  }'
-```
-
-### Delete
-```bash
-curl -X DELETE "http://localhost:8000/products/1"
-```
-
----
-
 ## 🎯 Key Points
 
 ✅ **Step 1:** Import FastAPI and BaseModel
@@ -352,5 +269,3 @@ curl -X DELETE "http://localhost:8000/products/1"
 ✅ **Test:** Use Swagger UI at `/docs`
 
 ---
-
-
