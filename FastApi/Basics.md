@@ -11,8 +11,11 @@ Under the hood it leans on things you've already studied:
 - **Type hints** (`str`, `int`, `bool`) to validate incoming data
 - **Decorators** (`@app.get(...)`) to attach a Python function to a specific URL + method
 
-**A canteen counter analogy:** imagine your university canteen during break. A student hands their order slip to the counter guy (that's your **request**). He checks the token number, goes to the kitchen, and brings back the item (that's your **response**). FastAPI is that counter guy — it just routes requests to the right function and hands back whatever that function returns.
-
+**A canteen counter analogy:** 
+- You hand over your order slip → that's the request
+- The counter guy checks it and passes it to the right window → that's FastAPI routing
+- He brings back your food → that's the response
+- FastAPI itself is just that counter guy — matching orders to windows and handing back whatever comes out
 ---
 
 ## 2️⃣ Your First Route
@@ -36,10 +39,10 @@ Then open `http://127.0.0.1:8000` in your browser.
 
 ### 🔑 What's Actually Going On Here (OOP-wise)
 
-#### 🔶 Object Instantiation
+### 🔶 Object Instantiation :
 `app` is just an object made from the `FastAPI` class.
 
-#### 🔶 Method Binding
+### 🔶 Method Binding :
 `@app.get("/")` looks like special syntax, but it's really just a shorter way of calling a method on `app`. Here's the breakdown:
 
 ```
