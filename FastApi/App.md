@@ -261,11 +261,11 @@ INFO:     Application startup complete
 
 ## 🎯 Key Points
 
-✅ **Step 1:** Import FastAPI and BaseModel
-✅ **Step 2:** Define Pydantic model for validation
-✅ **Step 3:** Create "database" (in-memory dictionary)
-✅ **Step 4:** Create CRUD routes
-✅ **Run:** Use uvicorn to start server
+✅ **Step 1:** Import FastAPI and BaseModel  
+✅ **Step 2:** Define Pydantic model for validation  
+✅ **Step 3:** Create "database" (in-memory dictionary)  
+✅ **Step 4:** Create CRUD routes  
 ✅ **Test:** Use Swagger UI at `/docs`
+
 
 ---
