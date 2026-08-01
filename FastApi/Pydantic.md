@@ -105,4 +105,4 @@ Write the amount in words? Bounced back, no exceptions.
 
 ---
 
-⚡ **In short:** 👉 Pydantic = Type checking + Parsing + Auto-conversion. That's the "magic" behind FastAPI.
+**In short:** 👉 Pydantic = Type checking + Parsing + Auto-conversion. That's the "magic" behind FastAPI.
