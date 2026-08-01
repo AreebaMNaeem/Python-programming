@@ -156,12 +156,3 @@ def get_book(book_id: int, note: Optional[str] = None):
 - **Response types** → *how* you hand data back — JSON for the app, HTML for a browser page
 
 ---
-
-## ⚡ Summary
-
-| Layer | Handles |
-|---|---|
-| Python type hints | basic validation (`int`, `str`, ...) |
-| Pydantic models | structured request/response bodies |
-| FastAPI types | Path, Query, Form, File, Header, Cookie, Response |
-| `typing` module | `Optional`, `List`, `Dict`, `Union` |
