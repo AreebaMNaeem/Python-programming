@@ -72,6 +72,8 @@ def search(keyword: str = Query(None, min_length=3, max_length=50)):
 ```
 Called as `/search?keyword=fastapi`. `Query(None, min_length=3, max_length=50)` says: optional (defaults to `None`), but if provided, must be 3–50 characters.
 
+---
+
 ### 📦 Request Body Types
 
 Path and Query pull data *out of the URL*. These pull from elsewhere:
@@ -103,7 +105,9 @@ def upload_cover(file: UploadFile = File(...)):
 ```
 `UploadFile` gives you the file as an object (name, content type, and a way to read its bytes) rather than raw binary data.
 
-### 📦 Response types — for controlling what you send *back***
+---
+
+### 📦 Response types — for controlling what you send *back*
 
 - `Response` → raw, low-level response
 - `JSONResponse` → JSON explicitly (the default anyway)
